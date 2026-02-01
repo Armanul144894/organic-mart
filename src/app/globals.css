@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -14,8 +16,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #171717;
   }
 }
 
@@ -23,4 +25,39 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ═══════════ GLOBAL STYLE PATCH (Swiper arrow colours) ═══════════ */
+.swiper {
+  width: 100%;
+}
+
+.swiper-slide {
+  height: auto !important;
+  display: flex;
+}
+
+
+/* Keep custom navigation buttons visible */
+.cat-prev.swiper-button-disabled,
+.cat-next.swiper-button-disabled {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+
+
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  color: #059669 !important;
+  font-size: 14px !important;
+}
+.swiper-pagination-bullet-active {
+  background: #059669 !important;
+}
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5);
+  width: 10px !important;
+  height: 10px !important;
 }
