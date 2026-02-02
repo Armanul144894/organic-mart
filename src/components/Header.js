@@ -1,54 +1,189 @@
 'use client'
-import { Heart, Mail, Menu, Phone, Search, ShoppingCart, User, X } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
+import {
+  Phone,
+  Mail,
+  Search,
+  User,
+  Heart,
+  ShoppingCart,
+  Menu,
+  X,
+  ChevronDown,
+  ChevronRight,
+} from "lucide-react";
+import Link from "next/link";
+
+// ─── CATEGORY DATA WITH SUBCATEGORIES ────────────────────────────────────────
+const categoryData = [
+  {
+    id: 1,
+    name: "Vegetables",
+    emoji: "🥬",
+    subcategories: [
+      "Leafy Greens",
+      "Root Vegetables",
+      "Cruciferous",
+      "Nightshades",
+      "Herbs",
+      "Exotic Vegetables",
+    ],
+  },
+  {
+    id: 2,
+    name: "Fruits",
+    emoji: "🍎",
+    subcategories: [
+      "Tropical Fruits",
+      "Citrus Fruits",
+      "Berries",
+      "Stone Fruits",
+      "Melons",
+      "Exotic Fruits",
+    ],
+  },
+  {
+    id: 3,
+    name: "Dairy",
+    emoji: "🥛",
+    subcategories: [
+      "Milk & Cream",
+      "Cheese",
+      "Yogurt",
+      "Butter & Ghee",
+      "Eggs",
+      "Plant-Based Dairy",
+    ],
+  },
+  {
+    id: 4,
+    name: "Bakery",
+    emoji: "🍞",
+    subcategories: [
+      "Bread",
+      "Cakes & Pastries",
+      "Cookies",
+      "Buns & Rolls",
+      "Donuts",
+      "Specialty Breads",
+    ],
+  },
+  {
+    id: 5,
+    name: "Meat & Fish",
+    emoji: "🍖",
+    subcategories: [
+      "Chicken",
+      "Beef",
+      "Mutton",
+      "Fresh Fish",
+      "Frozen Fish",
+      "Seafood",
+    ],
+  },
+  {
+    id: 6,
+    name: "Beverages",
+    emoji: "🥤",
+    subcategories: [
+      "Tea & Coffee",
+      "Juices",
+      "Soft Drinks",
+      "Energy Drinks",
+      "Water",
+      "Health Drinks",
+    ],
+  },
+  {
+    id: 7,
+    name: "Snacks",
+    emoji: "🍪",
+    subcategories: [
+      "Chips & Crisps",
+      "Biscuits & Cookies",
+      "Namkeen",
+      "Chocolates",
+      "Nuts & Seeds",
+      "Healthy Snacks",
+    ],
+  },
+  {
+    id: 8,
+    name: "Grains",
+    emoji: "🌾",
+    subcategories: [
+      "Rice",
+      "Wheat & Flour",
+      "Pulses & Lentils",
+      "Oats & Cereals",
+      "Pasta & Noodles",
+      "Specialty Grains",
+    ],
+  },
+  {
+    id: 9,
+    name: "Cooking Essentials",
+    emoji: "🌶️",
+    subcategories: [
+      "Cooking Oil",
+      "Spices",
+      "Salt & Sugar",
+      "Sauces & Condiments",
+      "Masalas",
+      "Vinegar & Pickles",
+    ],
+  },
+];
 
 export default function Header() {
-      // ── mobile menu ──
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showCategoryMenu, setShowCategoryMenu] = useState(false);
+  const [activeMobileCategory, setActiveMobileCategory] = useState(null);
+
   const navLinks = [
-    { label: "All Categories", icon: <Menu size={16} /> },
-    { label: "🔥 Hot Deals" },
-    { label: "🆕 New Arrivals" },
-    { label: "🏆 Best Sellers" },
-    { label: "💰 Weekly Offers" },
-    { label: "🎁 Gift Cards" },
+    { label: "🔥 Hot Deals", href: "#" },
+    { label: "🆕 New Arrivals", href: "#" },
+    { label: "🏆 Best Sellers", href: "#" },
+    { label: "💰 Weekly Offers", href: "#" },
+    { label: "🎁 Gift Cards", href: "#" },
   ];
+
   return (
-    <div className="" style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}>
+    <>
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        {/* top-bar */}
+        {/* ═══════════ TOP BAR ═══════════ */}
         <div className="bg-emerald-600 text-white text-xs">
           <div className="container mx-auto px-4 py-1.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1">
                 <Phone size={12} /> +880-1234-567890
               </span>
-              <span className="flex items-center gap-1">
-                <Mail size={12} /> support@OrganicMart.com
+              <span className="hidden md:flex items-center gap-1">
+                <Mail size={12} /> support@organicmart.com
               </span>
             </div>
             <div className="flex items-center gap-4 text-emerald-200">
-              <a href="#" className="hover:text-white transition-colors">
+              <Link href="#" className="hover:text-white transition-colors">
                 Track Order
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
+              </Link>
+              <Link href="#" className="hover:text-white transition-colors">
                 Help
-              </a>
+              </Link>
               <span className="border-l border-emerald-400 h-3 mx-1" />
-              <a
+              <Link
                 href="#"
                 className="hover:text-white transition-colors font-semibold"
               >
                 EN
-              </a>
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* main header */}
+        {/* ═══════════ MAIN HEADER ═══════════ */}
         <div className="container mx-auto px-4 py-3 flex items-center gap-4">
           {/* logo */}
-          <a href="#" className="flex items-center gap-1.5 shrink-0">
+          <Link href="#" className="flex items-center gap-1.5 shrink-0">
             <span className="text-2xl">🌱</span>
             <span
               className="text-xl font-extrabold text-emerald-600"
@@ -56,10 +191,10 @@ export default function Header() {
             >
               OrganicMart
             </span>
-          </a>
+          </Link>
 
-          {/* search */}
-          <div className="flex-1 max-w-xl flex">
+          {/* search - hidden on mobile */}
+          <div className="flex-1 max-w-xl hidden md:flex">
             <input
               type="text"
               placeholder="Search for products, brands and more…"
@@ -70,7 +205,7 @@ export default function Header() {
             </button>
           </div>
 
-          {/* actions */}
+          {/* actions - hidden on small screens */}
           <div className="hidden sm:flex items-center gap-2 ml-auto">
             {[
               { icon: <User size={20} />, label: "Account", badge: null },
@@ -84,13 +219,17 @@ export default function Header() {
             ].map((a, i) => (
               <button
                 key={i}
-                className={`relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors ${a.primary ? "bg-emerald-600 text-white hover:bg-emerald-700" : "text-gray-600 hover:bg-gray-100"}`}
+                className={`relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors ${
+                  a.primary
+                    ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                    : "text-gray-600 hover:bg-gray-100"
+                }`}
               >
                 {a.icon}
                 <span className="text-xs font-semibold">{a.label}</span>
                 {a.badge && (
                   <span
-                    className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4.5 h-4.5 rounded-full flex items-center justify-center"
+                    className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center"
                     style={{ width: 18, height: 18, fontSize: 10 }}
                   >
                     {a.badge}
@@ -105,29 +244,248 @@ export default function Header() {
             className="sm:hidden ml-auto text-gray-600"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* nav bar */}
-        <div
-          className={`border-t border-gray-100 overflow-hidden ${menuOpen ? "block" : "hidden"} sm:block`}
-        >
+        {/* ═══════════ DESKTOP NAVIGATION ═══════════ */}
+        <div className="border-t border-gray-100 hidden sm:block">
           <div className="container mx-auto px-4">
-            <nav className="flex flex-wrap sm:flex-nowrap">
+            <nav className="flex items-center">
+              {/* All Categories with Mega Menu */}
+              <div
+                className="relative"
+                onMouseEnter={() => setShowCategoryMenu(true)}
+                onMouseLeave={() => setShowCategoryMenu(false)}
+              >
+                <button className="flex items-center gap-1.5 px-3 py-2.5 text-sm font-semibold text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors">
+                  <Menu size={16} /> All Categories
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform ${showCategoryMenu ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                {/* Mega Menu Dropdown */}
+                {showCategoryMenu && (
+                  <div className="absolute left-0 top-full w-[700px] lg:w-[800px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 grid grid-cols-3 gap-x-6 gap-y-4 z-50">
+                    {categoryData.map((cat) => (
+                      <div key={cat.id} className="group">
+                        <Link
+                          href="#"
+                          className="flex items-center gap-2 font-bold text-gray-800 text-sm mb-2 hover:text-emerald-600 transition-colors"
+                        >
+                          <span className="text-lg">{cat.emoji}</span>
+                          {cat.name}
+                        </Link>
+                        <ul className="space-y-1.5 pl-8">
+                          {cat.subcategories.map((sub, idx) => (
+                            <li key={idx}>
+                              <Link
+                                href="#"
+                                className="text-xs text-gray-500 hover:text-emerald-600 hover:translate-x-1 transition-all inline-block"
+                              >
+                                {sub}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Other Nav Links */}
               {navLinks.map((n, i) => (
-                <a
+                <Link
                   key={i}
-                  href="#"
+                  href={n.href}
                   className="flex items-center gap-1.5 px-3 py-2.5 text-sm font-semibold text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
                 >
-                  {n.icon} {n.label}
-                </a>
+                  {n.label}
+                </Link>
               ))}
             </nav>
           </div>
         </div>
+
+        {/* ═══════════ MOBILE SEARCH (visible when menu closed) ═══════════ */}
+        {!menuOpen && (
+          <div className="md:hidden border-t border-gray-100 px-4 py-2">
+            <div className="flex">
+              <input
+                type="text"
+                placeholder="Search products…"
+                className="flex-1 border border-gray-200 rounded-l-xl px-4 py-2 text-sm outline-none focus:border-emerald-400 transition-colors"
+              />
+              <button className="bg-emerald-600 hover:bg-emerald-700 transition-colors text-white px-4 rounded-r-xl flex items-center">
+                <Search size={18} />
+              </button>
+            </div>
+          </div>
+        )}
       </header>
-    </div>
+
+      {/* ═══════════ MOBILE OFFCANVAS MENU ═══════════ */}
+      {menuOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 z-40 sm:hidden"
+            onClick={() => setMenuOpen(false)}
+          />
+
+          {/* Offcanvas Panel */}
+          <div className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white z-50 shadow-2xl overflow-y-auto sm:hidden animate-slide-in">
+            {/* Header */}
+            <div className="bg-emerald-600 text-white p-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">🌱</span>
+                <span className="text-lg font-bold">OrganicMart</span>
+              </div>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="text-white hover:bg-white/20 rounded-lg p-1.5 transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* User Actions */}
+            <div className="grid grid-cols-3 gap-2 p-4 border-b border-gray-100">
+              {[
+                { icon: <User size={20} />, label: "Account" },
+                { icon: <Heart size={20} />, label: "Wishlist", badge: 3 },
+                { icon: <ShoppingCart size={20} />, label: "Cart", badge: 5 },
+              ].map((a, i) => (
+                <button
+                  key={i}
+                  className="relative flex flex-col items-center gap-1.5 p-3 rounded-xl bg-gray-50 hover:bg-emerald-50 transition-colors"
+                >
+                  {a.icon}
+                  <span className="text-xs font-semibold text-gray-700">
+                    {a.label}
+                  </span>
+                  {a.badge && (
+                    <span className="absolute top-2 right-2 bg-red-500 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                      {a.badge}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+
+            {/* Categories with Subcategories */}
+            <div className="p-4">
+              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
+                Shop by Category
+              </h3>
+              <div className="space-y-1">
+                {categoryData.map((cat) => (
+                  <div key={cat.id}>
+                    <button
+                      onClick={() =>
+                        setActiveMobileCategory(
+                          activeMobileCategory === cat.id ? null : cat.id
+                        )
+                      }
+                      className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg transition-colors"
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="text-lg">{cat.emoji}</span>
+                        {cat.name}
+                      </span>
+                      <ChevronRight
+                        size={16}
+                        className={`transition-transform ${activeMobileCategory === cat.id ? "rotate-90" : ""}`}
+                      />
+                    </button>
+
+                    {/* Subcategories */}
+                    {activeMobileCategory === cat.id && (
+                      <div className="pl-10 pr-3 py-2 space-y-1.5 animate-slide-down">
+                        {cat.subcategories.map((sub, idx) => (
+                          <Link
+                            key={idx}
+                            href="#"
+                            className="block text-xs text-gray-500 hover:text-emerald-600 py-1 transition-colors"
+                          >
+                            {sub}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="p-4 border-t border-gray-100">
+              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
+                Quick Links
+              </h3>
+              <div className="space-y-1">
+                {navLinks.map((link, i) => (
+                  <Link
+                    key={i}
+                    href={link.href}
+                    className="block px-3 py-2.5 text-sm font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Contact Info */}
+            <div className="p-4 border-t border-gray-100 bg-gray-50">
+              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
+                Contact Us
+              </h3>
+              <div className="space-y-2 text-sm text-gray-600">
+                <p className="flex items-center gap-2">
+                  <Phone size={14} className="text-emerald-600" />
+                  +880-1234-567890
+                </p>
+                <p className="flex items-center gap-2">
+                  <Mail size={14} className="text-emerald-600" />
+                  support@organicmart.com
+                </p>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* ═══════════ ANIMATIONS ═══════════ */}
+      <style jsx>{`
+        @keyframes slide-in {
+          from {
+            transform: translateX(100%);
+          }
+          to {
+            transform: translateX(0);
+          }
+        }
+        @keyframes slide-down {
+          from {
+            opacity: 0;
+            max-height: 0;
+          }
+          to {
+            opacity: 1;
+            max-height: 500px;
+          }
+        }
+        .animate-slide-in {
+          animation: slide-in 0.3s ease-out;
+        }
+        .animate-slide-down {
+          animation: slide-down 0.3s ease-out;
+        }
+      `}</style>
+    </>
   );
 }

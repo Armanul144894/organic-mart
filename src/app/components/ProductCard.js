@@ -12,7 +12,7 @@ export default function ProductCard({product}) {
       <div className="relative overflow-hidden bg-gray-50" style={{ height: 220 }}>
 
         <Image 
-        src={product.image}
+        src={product.images[0]}
           alt={product.name}
           height={200}
           width={400}
