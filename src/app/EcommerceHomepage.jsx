@@ -25,6 +25,7 @@ import products from "@/data/products";
 import categories from "@/data/categories";
 import DairyProducts from "./components/DairyProducts";
 import Header from "@/components/Header";
+import Link from "next/link";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const bannerSlides = [
@@ -81,12 +82,12 @@ function SectionTitle({ icon, title, sub, viewAll }) {
         {sub && <p className="text-sm text-gray-400 mt-0.5">{sub}</p>}
       </div>
       {viewAll && (
-        <a
+        <Link
           href="#"
           className="text-emerald-600 text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all"
         >
           View All <ArrowRight size={15} />
-        </a>
+        </Link>
       )}
     </div>
   );

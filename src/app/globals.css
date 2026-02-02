@@ -53,11 +53,43 @@ body {
   color: #059669 !important;
   font-size: 14px !important;
 }
+
 .swiper-pagination-bullet-active {
   background: #059669 !important;
 }
+
 .swiper-pagination-bullet {
   background: rgba(255, 255, 255, 0.5);
   width: 10px !important;
   height: 10px !important;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
 }

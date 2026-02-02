@@ -13,6 +13,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
+import CartOffcanvas from "./CartOffcanvas";
 
 // ─── CATEGORY DATA WITH SUBCATEGORIES ────────────────────────────────────────
 const categoryData = [
@@ -135,7 +136,8 @@ const categoryData = [
   },
 ];
 
-export default function Header() {
+export default function Header({cartCount=3}) {
+    const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const [activeMobileCategory, setActiveMobileCategory] = useState(null);
@@ -210,12 +212,7 @@ export default function Header() {
             {[
               { icon: <User size={20} />, label: "Account", badge: null },
               { icon: <Heart size={20} />, label: "Wishlist", badge: 3 },
-              {
-                icon: <ShoppingCart size={20} />,
-                label: "Cart",
-                badge: 5,
-                primary: true,
-              },
+              
             ].map((a, i) => (
               <button
                 key={i}
@@ -237,6 +234,20 @@ export default function Header() {
                 )}
               </button>
             ))}
+            <button
+                onClick={() => setIsOpen(true)}
+                className="relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors bg-emerald-600 text-white hover:bg-emerald-700"
+              >
+                <ShoppingCart size={20}/>
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartCount}
+                    
+                  </span>
+                )}
+                <span className="text-xs font-semibold">Cart</span>
+              </button>
+              
           </div>
 
           {/* mobile hamburger */}
@@ -459,33 +470,8 @@ export default function Header() {
         </>
       )}
 
-      {/* ═══════════ ANIMATIONS ═══════════ */}
-      <style jsx>{`
-        @keyframes slide-in {
-          from {
-            transform: translateX(100%);
-          }
-          to {
-            transform: translateX(0);
-          }
-        }
-        @keyframes slide-down {
-          from {
-            opacity: 0;
-            max-height: 0;
-          }
-          to {
-            opacity: 1;
-            max-height: 500px;
-          }
-        }
-        .animate-slide-in {
-          animation: slide-in 0.3s ease-out;
-        }
-        .animate-slide-down {
-          animation: slide-down 0.3s ease-out;
-        }
-      `}</style>
+      <CartOffcanvas isOpen={isOpen} setIsOpen={setIsOpen}/>
+
     </>
   );
 }
