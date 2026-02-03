@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState } from "react";
 import {
   Phone,
@@ -136,11 +136,12 @@ const categoryData = [
   },
 ];
 
-export default function Header({cartCount=3}) {
-    const [isOpen, setIsOpen] = useState(false);
+export default function Header({ cartCount = 3 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const [activeMobileCategory, setActiveMobileCategory] = useState(null);
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
     { label: "🔥 Hot Deals", href: "#" },
@@ -152,7 +153,7 @@ export default function Header({cartCount=3}) {
 
   return (
     <>
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="bg-white shadow-sm sticky top-0 z-40">
         {/* ═══════════ TOP BAR ═══════════ */}
         <div className="bg-emerald-600 text-white text-xs">
           <div className="container mx-auto px-4 py-1.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
@@ -212,7 +213,6 @@ export default function Header({cartCount=3}) {
             {[
               { icon: <User size={20} />, label: "Account", badge: null },
               { icon: <Heart size={20} />, label: "Wishlist", badge: 3 },
-              
             ].map((a, i) => (
               <button
                 key={i}
@@ -235,19 +235,17 @@ export default function Header({cartCount=3}) {
               </button>
             ))}
             <button
-                onClick={() => setIsOpen(true)}
-                className="relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors bg-emerald-600 text-white hover:bg-emerald-700"
-              >
-                <ShoppingCart size={20}/>
-                {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartCount}
-                    
-                  </span>
-                )}
-                <span className="text-xs font-semibold">Cart</span>
-              </button>
-              
+              onClick={() => setIsOpen(true)}
+              className="relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors bg-emerald-600 text-white hover:bg-emerald-700"
+            >
+              <ShoppingCart size={20} />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+              <span className="text-xs font-semibold">Cart</span>
+            </button>
           </div>
 
           {/* mobile hamburger */}
@@ -368,7 +366,6 @@ export default function Header({cartCount=3}) {
               {[
                 { icon: <User size={20} />, label: "Account" },
                 { icon: <Heart size={20} />, label: "Wishlist", badge: 3 },
-                { icon: <ShoppingCart size={20} />, label: "Cart", badge: 5 },
               ].map((a, i) => (
                 <button
                   key={i}
@@ -385,6 +382,17 @@ export default function Header({cartCount=3}) {
                   )}
                 </button>
               ))}
+              <button onClick={() => setIsOpen(true)} className="relative flex flex-col items-center gap-1.5 p-3 rounded-xl bg-gray-50 hover:bg-emerald-50 transition-colors">
+                <ShoppingCart size={20} />
+                <span className="text-xs font-semibold text-gray-700">
+                  Cart
+                </span>
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
             </div>
 
             {/* Categories with Subcategories */}
@@ -398,7 +406,7 @@ export default function Header({cartCount=3}) {
                     <button
                       onClick={() =>
                         setActiveMobileCategory(
-                          activeMobileCategory === cat.id ? null : cat.id
+                          activeMobileCategory === cat.id ? null : cat.id,
                         )
                       }
                       className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg transition-colors"
@@ -471,7 +479,6 @@ export default function Header({cartCount=3}) {
       )}
 
       <CartOffcanvas isOpen={isOpen} setIsOpen={setIsOpen}/>
-
     </>
   );
 }

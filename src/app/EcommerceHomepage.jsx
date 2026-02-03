@@ -264,7 +264,7 @@ export default function EcommerceHomepage() {
       style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
     >
       {/* ═══════════ HEADER ═══════════ */}
-      <Header />
+
 
       {/* ═══════════ HERO BANNER SWIPER ═══════════ */}
       <HomeBanner bannerSlides={bannerSlides} heroSwiperRef={heroSwiperRef} />

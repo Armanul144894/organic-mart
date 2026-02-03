@@ -9,7 +9,7 @@ const products = [
     discount: 25,
     rating: 4.5,
     reviews: 128,
-    stock: 50,
+    inStock: 50,
     category: 'Vegetables',
     sku: 'VEG-TOM-001',
     images: [
@@ -46,7 +46,7 @@ const products = [
     discount: 25,
     rating: 4.4,
     reviews: 95,
-    stock: 150,
+    inStock: 150,
     category: 'Vegetables',
     sku: 'VEG-POT-002',
     images: [
@@ -81,7 +81,7 @@ const products = [
     discount: 20,
     rating: 4.6,
     reviews: 112,
-    stock: 80,
+    inStock: 80,
     category: 'Vegetables',
     sku: 'VEG-CAR-003',
     images: [
@@ -116,7 +116,7 @@ const products = [
     discount: 29,
     rating: 4.4,
     reviews: 87,
-    stock: 100,
+    inStock: 100,
     category: 'Vegetables',
     sku: 'VEG-CUC-004',
     images: [
@@ -151,7 +151,7 @@ const products = [
     discount: 21,
     rating: 4.5,
     reviews: 73,
-    stock: 45,
+    inStock: 45,
     category: 'Vegetables',
     sku: 'VEG-CAP-005',
     images: [
@@ -186,7 +186,7 @@ const products = [
     discount: 22,
     rating: 4.3,
     reviews: 156,
-    stock: 120,
+    inStock: 120,
     category: 'Vegetables',
     sku: 'VEG-ONI-006',
     images: [
@@ -221,7 +221,7 @@ const products = [
     discount: 20,
     rating: 4.5,
     reviews: 68,
-    stock: 60,
+    inStock: 60,
     category: 'Vegetables',
     sku: 'VEG-CAU-007',
     images: [
@@ -256,7 +256,7 @@ const products = [
     discount: 15,
     rating: 4.7,
     reviews: 92,
-    stock: 35,
+    inStock: 35,
     category: 'Vegetables',
     sku: 'VEG-BRO-008',
     images: [
@@ -291,7 +291,7 @@ const products = [
     discount: 33,
     rating: 4.6,
     reviews: 104,
-    stock: 70,
+    inStock: 70,
     category: 'Vegetables',
     sku: 'VEG-SPI-009',
     images: [
@@ -326,7 +326,7 @@ const products = [
     discount: 23,
     rating: 4.4,
     reviews: 61,
-    stock: 55,
+    inStock: 55,
     category: 'Vegetables',
     sku: 'VEG-BEA-010',
     images: [
@@ -361,7 +361,7 @@ const products = [
     discount: 22,
     rating: 4.5,
     reviews: 78,
-    stock: 65,
+    inStock: 65,
     category: 'Vegetables',
     sku: 'VEG-EGG-011',
     images: [
@@ -396,7 +396,7 @@ const products = [
     discount: 20,
     rating: 4.3,
     reviews: 55,
-    stock: 40,
+    inStock: 40,
     category: 'Vegetables',
     sku: 'VEG-PUM-012',
     images: [
@@ -431,7 +431,7 @@ const products = [
     discount: 25,
     rating: 4.2,
     reviews: 43,
-    stock: 50,
+    inStock: 50,
     category: 'Vegetables',
     sku: 'VEG-BIT-013',
     images: [
@@ -466,7 +466,7 @@ const products = [
     discount: 29,
     rating: 4.4,
     reviews: 89,
-    stock: 75,
+    inStock: 75,
     category: 'Vegetables',
     sku: 'VEG-CAB-014',
     images: [
@@ -501,7 +501,7 @@ const products = [
     discount: 33,
     rating: 4.3,
     reviews: 52,
-    stock: 60,
+    inStock: 60,
     category: 'Vegetables',
     sku: 'VEG-RAD-015',
     images: [
@@ -538,7 +538,7 @@ const products = [
     discount: 14,
     rating: 4.6,
     reviews: 145,
-    stock: 90,
+    inStock: 90,
     category: 'Fruits',
     sku: 'FRT-BAN-016',
     images: [
@@ -573,7 +573,7 @@ const products = [
     discount: 10,
     rating: 4.7,
     reviews: 167,
-    stock: 65,
+    inStock: 65,
     category: 'Fruits',
     sku: 'FRT-APP-017',
     images: [
@@ -608,7 +608,7 @@ const products = [
     discount: 12,
     rating: 4.8,
     reviews: 203,
-    stock: 30,
+    inStock: 30,
     category: 'Fruits',
     sku: 'FRT-STR-018',
     images: [
@@ -643,7 +643,7 @@ const products = [
     discount: 14,
     rating: 4.6,
     reviews: 134,
-    stock: 70,
+    inStock: 70,
     category: 'Fruits',
     sku: 'FRT-ORA-019',
     images: [
@@ -678,7 +678,7 @@ const products = [
     discount: 17,
     rating: 4.9,
     reviews: 289,
-    stock: 45,
+    inStock: 45,
     category: 'Fruits',
     sku: 'FRT-MAN-020',
     images: [
@@ -713,7 +713,7 @@ const products = [
     discount: 13,
     rating: 4.7,
     reviews: 156,
-    stock: 40,
+    inStock: 40,
     category: 'Fruits',
     sku: 'FRT-GRA-021',
     images: [
@@ -748,7 +748,7 @@ const products = [
     discount: 20,
     rating: 4.5,
     reviews: 178,
-    stock: 25,
+    inStock: 25,
     category: 'Fruits',
     sku: 'FRT-WAT-022',
     images: [
@@ -783,7 +783,7 @@ const products = [
     discount: 20,
     rating: 4.6,
     reviews: 112,
-    stock: 35,
+    inStock: 35,
     category: 'Fruits',
     sku: 'FRT-PIN-023',
     images: [
@@ -818,7 +818,7 @@ const products = [
     discount: 10,
     rating: 4.8,
     reviews: 98,
-    stock: 30,
+    inStock: 30,
     category: 'Fruits',
     sku: 'FRT-POM-024',
     images: [
@@ -853,7 +853,7 @@ const products = [
     discount: 23,
     rating: 4.5,
     reviews: 87,
-    stock: 50,
+    inStock: 50,
     category: 'Fruits',
     sku: 'FRT-PAP-025',
     images: [
@@ -888,7 +888,7 @@ const products = [
     discount: 11,
     rating: 4.7,
     reviews: 73,
-    stock: 20,
+    inStock: 20,
     category: 'Fruits',
     sku: 'FRT-KIW-026',
     images: [
@@ -923,7 +923,7 @@ const products = [
     discount: 20,
     rating: 4.4,
     reviews: 91,
-    stock: 55,
+    inStock: 55,
     category: 'Fruits',
     sku: 'FRT-GUA-027',
     images: [
@@ -958,7 +958,7 @@ const products = [
     discount: 18,
     rating: 4.8,
     reviews: 64,
-    stock: 25,
+    inStock: 25,
     category: 'Fruits',
     sku: 'FRT-DRA-028',
     images: [
@@ -993,7 +993,7 @@ const products = [
     discount: 13,
     rating: 4.6,
     reviews: 82,
-    stock: 40,
+    inStock: 40,
     category: 'Fruits',
     sku: 'FRT-PEA-029',
     images: [
@@ -1028,7 +1028,7 @@ const products = [
     discount: 12,
     rating: 4.7,
     reviews: 69,
-    stock: 30,
+    inStock: 30,
     category: 'Fruits',
     sku: 'FRT-PCH-030',
     images: [
@@ -1065,7 +1065,7 @@ const products = [
     discount: 13,
     rating: 4.7,
     reviews: 187,
-    stock: 100,
+    inStock: 100,
     category: 'Dairy',
     sku: 'DAI-MLK-031',
     images: [
@@ -1100,7 +1100,7 @@ const products = [
     discount: 14,
     rating: 4.9,
     reviews: 214,
-    stock: 60,
+    inStock: 60,
     category: 'Dairy',
     sku: 'DAI-EGG-032',
     images: [
@@ -1135,7 +1135,7 @@ const products = [
     discount: 12,
     rating: 4.7,
     reviews: 198,
-    stock: 70,
+    inStock: 70,
     category: 'Dairy',
     sku: 'DAI-YOG-033',
     images: [
@@ -1170,7 +1170,7 @@ const products = [
     discount: 11,
     rating: 4.6,
     reviews: 156,
-    stock: 40,
+    inStock: 40,
     category: 'Dairy',
     sku: 'DAI-CHE-034',
     images: [
@@ -1205,7 +1205,7 @@ const products = [
     discount: 10,
     rating: 4.8,
     reviews: 142,
-    stock: 55,
+    inStock: 55,
     category: 'Dairy',
     sku: 'DAI-BUT-035',
     images: [
@@ -1240,7 +1240,7 @@ const products = [
     discount: 12,
     rating: 4.7,
     reviews: 128,
-    stock: 35,
+    inStock: 35,
     category: 'Dairy',
     sku: 'DAI-CRE-036',
     images: [
@@ -1275,7 +1275,7 @@ const products = [
     discount: 14,
     rating: 4.6,
     reviews: 165,
-    stock: 45,
+    inStock: 45,
     category: 'Dairy',
     sku: 'DAI-PAN-037',
     images: [
@@ -1310,7 +1310,7 @@ const products = [
     discount: 10,
     rating: 4.9,
     reviews: 234,
-    stock: 30,
+    inStock: 30,
     category: 'Dairy',
     sku: 'DAI-GHE-038',
     images: [
@@ -1345,7 +1345,7 @@ const products = [
     discount: 12,
     rating: 4.8,
     reviews: 176,
-    stock: 40,
+    inStock: 40,
     category: 'Dairy',
     sku: 'DAI-MOZ-039',
     images: [
@@ -1380,7 +1380,7 @@ const products = [
     discount: 14,
     rating: 4.7,
     reviews: 189,
-    stock: 65,
+    inStock: 65,
     category: 'Dairy',
     sku: 'DAI-CON-040',
     images: [
@@ -1415,7 +1415,7 @@ const products = [
     discount: 14,
     rating: 4.6,
     reviews: 154,
-    stock: 80,
+    inStock: 80,
     category: 'Dairy',
     sku: 'DAI-YOG-041',
     images: [
@@ -1450,7 +1450,7 @@ const products = [
     discount: 11,
     rating: 4.9,
     reviews: 112,
-    stock: 30,
+    inStock: 30,
     category: 'Dairy',
     sku: 'DAI-PAR-042',
     images: [
@@ -1485,7 +1485,7 @@ const products = [
     discount: 17,
     rating: 4.5,
     reviews: 97,
-    stock: 80,
+    inStock: 80,
     category: 'Dairy',
     sku: 'DAI-BUT-043',
     images: [
@@ -1520,7 +1520,7 @@ const products = [
     discount: 12,
     rating: 4.6,
     reviews: 86,
-    stock: 45,
+    inStock: 45,
     category: 'Dairy',
     sku: 'DAI-SOU-044',
     images: [
@@ -1555,7 +1555,7 @@ const products = [
     discount: 10,
     rating: 4.7,
     reviews: 143,
-    stock: 35,
+    inStock: 35,
     category: 'Dairy',
     sku: 'DAI-WHI-045',
     images: [
@@ -1592,7 +1592,7 @@ const products = [
     discount: 10,
     rating: 4.8,
     reviews: 312,
-    stock: 30,
+    inStock: 30,
     category: 'Grains',
     sku: 'GRN-RIC-046',
     images: [
@@ -1627,7 +1627,7 @@ const products = [
     discount: 11,
     rating: 4.5,
     reviews: 156,
-    stock: 75,
+    inStock: 75,
     category: 'Grains',
     sku: 'GRN-PAS-047',
     images: [
@@ -1662,7 +1662,7 @@ const products = [
     discount: 14,
     rating: 4.6,
     reviews: 224,
-    stock: 90,
+    inStock: 90,
     category: 'Grains',
     sku: 'GRN-FLO-048',
     images: [
@@ -1697,7 +1697,7 @@ const products = [
     discount: 10,
     rating: 4.7,
     reviews: 198,
-    stock: 60,
+    inStock: 60,
     category: 'Grains',
     sku: 'GRN-OAT-049',
     images: [
@@ -1732,7 +1732,7 @@ const products = [
     discount: 12,
     rating: 4.8,
     reviews: 267,
-    stock: 55,
+    inStock: 55,
     category: 'Grains',
     sku: 'GRN-COR-050',
     images: [
@@ -1767,7 +1767,7 @@ const products = [
     discount: 12,
     rating: 4.7,
     reviews: 143,
-    stock: 40,
+    inStock: 40,
     category: 'Grains',
     sku: 'GRN-BRO-051',
     images: [
@@ -1802,7 +1802,7 @@ const products = [
     discount: 10,
     rating: 4.9,
     reviews: 89,
-    stock: 25,
+    inStock: 25,
     category: 'Grains',
     sku: 'GRN-QUI-052',
     images: [
@@ -1837,7 +1837,7 @@ const products = [
     discount: 17,
     rating: 4.6,
     reviews: 178,
-    stock: 70,
+    inStock: 70,
     category: 'Grains',
     sku: 'GRN-MAC-053',
     images: [
@@ -1872,7 +1872,7 @@ const products = [
     discount: 18,
     rating: 4.5,
     reviews: 342,
-    stock: 100,
+    inStock: 100,
     category: 'Grains',
     sku: 'GRN-NOO-054',
     images: [
@@ -1907,7 +1907,7 @@ const products = [
     discount: 14,
     rating: 4.6,
     reviews: 94,
-    stock: 35,
+    inStock: 35,
     category: 'Grains',
     sku: 'GRN-COU-055',
     images: [
@@ -1944,7 +1944,7 @@ const products = [
     discount: 12,
     rating: 4.6,
     reviews: 88,
-    stock: 45,
+    inStock: 45,
     category: 'Bakery',
     sku: 'BAK-BBR-056',
     images: [
@@ -1967,7 +1967,7 @@ const products = [
     discount: 16,
     rating: 4.5,
     reviews: 95,
-    stock: 50,
+    inStock: 50,
     category: 'Bakery',
     sku: 'BAK-WBR-057',
     images: [
@@ -1990,7 +1990,7 @@ const products = [
     discount: 14,
     rating: 4.7,
     reviews: 72,
-    stock: 30,
+    inStock: 30,
     category: 'Bakery',
     sku: 'BAK-CRO-058',
     images: [
@@ -2013,7 +2013,7 @@ const products = [
     discount: 14,
     rating: 4.5,
     reviews: 80,
-    stock: 55,
+    inStock: 55,
     category: 'Bakery',
     sku: 'BAK-BUN-059',
     images: [
@@ -2036,7 +2036,7 @@ const products = [
     discount: 16,
     rating: 4.8,
     reviews: 90,
-    stock: 40,
+    inStock: 40,
     category: 'Bakery',
     sku: 'BAK-CAK-060',
     images: [
@@ -2059,7 +2059,7 @@ const products = [
     discount: 14,
     rating: 4.6,
     reviews: 105,
-    stock: 60,
+    inStock: 60,
     category: 'Bakery',
     sku: 'BAK-COO-061',
     images: [
@@ -2082,7 +2082,7 @@ const products = [
     discount: 17,
     rating: 4.7,
     reviews: 70,
-    stock: 35,
+    inStock: 35,
     category: 'Bakery',
     sku: 'BAK-MUF-062',
     images: [
@@ -2105,7 +2105,7 @@ const products = [
     discount: 15,
     rating: 4.8,
     reviews: 82,
-    stock: 45,
+    inStock: 45,
     category: 'Bakery',
     sku: 'BAK-GAR-063',
     images: [
@@ -2132,7 +2132,7 @@ const products = [
     discount: 12,
     rating: 4.8,
     reviews: 120,
-    stock: 25,
+    inStock: 25,
     category: 'Meat',
     sku: 'MET-CHK-064',
     images: [
@@ -2155,7 +2155,7 @@ const products = [
     discount: 10,
     rating: 4.7,
     reviews: 95,
-    stock: 20,
+    inStock: 20,
     category: 'Meat',
     sku: 'MET-BEF-065',
     images: [
@@ -2178,7 +2178,7 @@ const products = [
     discount: 11,
     rating: 4.6,
     reviews: 78,
-    stock: 15,
+    inStock: 15,
     category: 'Meat',
     sku: 'MET-MUT-066',
     images: [
@@ -2201,7 +2201,7 @@ const products = [
     discount: 9,
     rating: 4.9,
     reviews: 110,
-    stock: 12,
+    inStock: 12,
     category: 'Meat',
     sku: 'MET-SAL-067',
     images: [
@@ -2224,7 +2224,7 @@ const products = [
     discount: 13,
     rating: 4.8,
     reviews: 92,
-    stock: 18,
+    inStock: 18,
     category: 'Meat',
     sku: 'MET-PRW-068',
     images: [
@@ -2247,7 +2247,7 @@ const products = [
     discount: 14,
     rating: 4.7,
     reviews: 85,
-    stock: 30,
+    inStock: 30,
     category: 'Meat',
     sku: 'MET-WNG-069',
     images: [
@@ -2270,7 +2270,7 @@ const products = [
     discount: 10,
     rating: 4.6,
     reviews: 70,
-    stock: 22,
+    inStock: 22,
     category: 'Meat',
     sku: 'MET-FIL-070',
     images: [
@@ -2293,7 +2293,7 @@ const products = [
     discount: 11,
     rating: 4.7,
     reviews: 88,
-    stock: 28,
+    inStock: 28,
     category: 'Meat',
     sku: 'MET-GRB-071',
     images: [
@@ -2318,7 +2318,7 @@ const products = [
     discount: 14,
     rating: 4.7,
     reviews: 140,
-    stock: 40,
+    inStock: 40,
     category: 'Beverages',
     sku: 'BEV-GRT-072',
     images: [
@@ -2341,7 +2341,7 @@ const products = [
     discount: 14,
     rating: 4.8,
     reviews: 150,
-    stock: 55,
+    inStock: 55,
     category: 'Beverages',
     sku: 'BEV-ORG-073',
     images: [
@@ -2364,7 +2364,7 @@ const products = [
     discount: 12,
     rating: 4.8,
     reviews: 210,
-    stock: 45,
+    inStock: 45,
     category: 'Beverages',
     sku: 'BEV-COF-074',
     images: [
@@ -2387,7 +2387,7 @@ const products = [
     discount: 11,
     rating: 4.5,
     reviews: 180,
-    stock: 80,
+    inStock: 80,
     category: 'Beverages',
     sku: 'BEV-COL-075',
     images: [
@@ -2410,7 +2410,7 @@ const products = [
     discount: 13,
     rating: 4.7,
     reviews: 160,
-    stock: 50,
+    inStock: 50,
     category: 'Beverages',
     sku: 'BEV-MNG-076',
     images: [
@@ -2433,7 +2433,7 @@ const products = [
     discount: 11,
     rating: 4.6,
     reviews: 140,
-    stock: 70,
+    inStock: 70,
     category: 'Beverages',
     sku: 'BEV-ENG-077',
     images: [
@@ -2456,7 +2456,7 @@ const products = [
     discount: 12,
     rating: 4.7,
     reviews: 95,
-    stock: 35,
+    inStock: 35,
     category: 'Beverages',
     sku: 'BEV-LMT-078',
     images: [
@@ -2479,7 +2479,7 @@ const products = [
     discount: 14,
     rating: 4.8,
     reviews: 175,
-    stock: 60,
+    inStock: 60,
     category: 'Beverages',
     sku: 'BEV-COC-079',
     images: [
@@ -2502,7 +2502,7 @@ const products = [
     discount: 15,
     rating: 4.5,
     reviews: 130,
-    stock: 75,
+    inStock: 75,
     category: 'Beverages',
     sku: 'BEV-SPW-080',
     images: [
@@ -2525,7 +2525,7 @@ const products = [
     discount: 13,
     rating: 4.7,
     reviews: 145,
-    stock: 48,
+    inStock: 48,
     category: 'Beverages',
     sku: 'BEV-APL-081',
     images: [
@@ -2552,7 +2552,7 @@ const products = [
   discount: 15,
   rating: 4.5,
   reviews: 220,
-  stock: 120,
+  inStock: 120,
   category: 'Snacks',
   sku: 'SNK-BIS-082',
   images: [
@@ -2575,7 +2575,7 @@ const products = [
   discount: 20,
   rating: 4.6,
   reviews: 310,
-  stock: 95,
+  inStock: 95,
   category: 'Snacks',
   sku: 'SNK-CHP-083',
   images: [
@@ -2598,7 +2598,7 @@ const products = [
   discount: 13,
   rating: 4.8,
   reviews: 420,
-  stock: 85,
+  inStock: 85,
   category: 'Snacks',
   sku: 'SNK-CHO-084',
   images: [
@@ -2621,7 +2621,7 @@ const products = [
   discount: 14,
   rating: 4.7,
   reviews: 165,
-  stock: 55,
+  inStock: 55,
   category: 'Snacks',
   sku: 'SNK-NUT-085',
   images: [
@@ -2644,7 +2644,7 @@ const products = [
   discount: 17,
   rating: 4.5,
   reviews: 140,
-  stock: 70,
+  inStock: 70,
   category: 'Snacks',
   sku: 'SNK-POP-086',
   images: [
@@ -2667,7 +2667,7 @@ const products = [
   discount: 18,
   rating: 4.6,
   reviews: 200,
-  stock: 90,
+  inStock: 90,
   category: 'Snacks',
   sku: 'SNK-CRA-087',
   images: [
@@ -2690,7 +2690,7 @@ const products = [
   discount: 14,
   rating: 4.7,
   reviews: 155,
-  stock: 45,
+  inStock: 45,
   category: 'Snacks',
   sku: 'SNK-ENG-088',
   images: [
@@ -2713,7 +2713,7 @@ const products = [
   discount: 12,
   rating: 4.8,
   reviews: 185,
-  stock: 40,
+  inStock: 40,
   category: 'Snacks',
   sku: 'SNK-PNB-089',
   images: [
@@ -2736,7 +2736,7 @@ const products = [
   discount: 14,
   rating: 4.6,
   reviews: 170,
-  stock: 80,
+  inStock: 80,
   category: 'Snacks',
   sku: 'SNK-WAF-090',
   images: [
@@ -2759,7 +2759,7 @@ const products = [
   discount: 15,
   rating: 4.5,
   reviews: 135,
-  stock: 60,
+  inStock: 60,
   category: 'Snacks',
   sku: 'SNK-TOR-091',
   images: [
@@ -2786,7 +2786,7 @@ const products = [
   discount: 18,
   rating: 4.7,
   reviews: 260,
-  stock: 140,
+  inStock: 140,
   category: 'Cooking & Spices',
   sku: 'CSP-TUR-092',
   images: [
@@ -2809,7 +2809,7 @@ const products = [
   discount: 17,
   rating: 4.6,
   reviews: 240,
-  stock: 130,
+  inStock: 130,
   category: 'Cooking & Spices',
   sku: 'CSP-CHL-093',
   images: [
@@ -2832,7 +2832,7 @@ const products = [
   discount: 15,
   rating: 4.7,
   reviews: 210,
-  stock: 110,
+  inStock: 110,
   category: 'Cooking & Spices',
   sku: 'CSP-CUM-094',
   images: [
@@ -2855,7 +2855,7 @@ const products = [
   discount: 16,
   rating: 4.6,
   reviews: 195,
-  stock: 125,
+  inStock: 125,
   category: 'Cooking & Spices',
   sku: 'CSP-COR-095',
   images: [
@@ -2878,7 +2878,7 @@ const products = [
   discount: 17,
   rating: 4.8,
   reviews: 300,
-  stock: 100,
+  inStock: 100,
   category: 'Cooking & Spices',
   sku: 'CSP-GRM-096',
   images: [
@@ -2901,7 +2901,7 @@ const products = [
   discount: 15,
   rating: 4.7,
   reviews: 175,
-  stock: 85,
+  inStock: 85,
   category: 'Cooking & Spices',
   sku: 'CSP-BPP-097',
   images: [
@@ -2924,7 +2924,7 @@ const products = [
   discount: 14,
   rating: 4.8,
   reviews: 340,
-  stock: 75,
+  inStock: 75,
   category: 'Cooking & Spices',
   sku: 'CSP-MUS-098',
   images: [
@@ -2947,7 +2947,7 @@ const products = [
   discount: 12,
   rating: 4.5,
   reviews: 410,
-  stock: 200,
+  inStock: 200,
   category: 'Cooking & Spices',
   sku: 'CSP-SLT-099',
   images: [
@@ -2970,7 +2970,7 @@ const products = [
   discount: 17,
   rating: 4.6,
   reviews: 230,
-  stock: 95,
+  inStock: 95,
   category: 'Cooking & Spices',
   sku: 'CSP-GGP-100',
   images: [
