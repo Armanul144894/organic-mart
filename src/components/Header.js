@@ -186,7 +186,7 @@ export default function Header({ cartCount = 3 }) {
         {/* ═══════════ MAIN HEADER ═══════════ */}
         <div className="container mx-auto px-4 py-3 flex items-center gap-4">
           {/* logo */}
-          <Link href="#" className="flex items-center gap-1.5 shrink-0">
+          <Link href="/" className="flex items-center gap-1.5 shrink-0">
             <span className="text-2xl">🌱</span>
             <span
               className="text-xl font-extrabold text-emerald-600"

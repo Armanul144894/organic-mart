@@ -6,7 +6,10 @@ export default function CategoryCard({ cat }) {
   return (
     <div>
       <Link
-        href="#"
+        href={`${cat.name.toLowerCase()
+          .replace(/&/g, "and")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "")}`}
         className="group relative block rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 "
       >
         {/* background photo */}
