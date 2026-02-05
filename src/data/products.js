@@ -2188,7 +2188,7 @@ const productsData = [
   // =======================
   // 🍗 MEAT & FISH (64–71)
   // =======================
-  {
+ {
     id: 64,
     name: 'Chicken Breast 1kg',
     brand: 'Fresh Foods',
@@ -2198,7 +2198,8 @@ const productsData = [
     rating: 4.8,
     reviews: 120,
     inStock: 25,
-    category: 'Meat',
+    category: 'Meat & Fish',
+    subcategory: 'Chicken',
     sku: 'MET-CHK-064',
     images: [
       'https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=600&h=600&fit=crop',
@@ -2221,7 +2222,8 @@ const productsData = [
     rating: 4.7,
     reviews: 95,
     inStock: 20,
-    category: 'Meat',
+    category: 'Meat & Fish',
+    subcategory: 'Beef',
     sku: 'MET-BEF-065',
     images: [
       'https://images.unsplash.com/photo-1602470520998-f4a52199a3d6?w=600&h=600&fit=crop',
@@ -2244,7 +2246,8 @@ const productsData = [
     rating: 4.6,
     reviews: 78,
     inStock: 15,
-    category: 'Meat',
+    category: 'Meat & Fish',
+    subcategory: 'Mutton',
     sku: 'MET-MUT-066',
     images: [
       'https://images.unsplash.com/photo-1602470520998-f4a52199a3d6?w=600&h=600&fit=crop',
@@ -2267,7 +2270,8 @@ const productsData = [
     rating: 4.9,
     reviews: 110,
     inStock: 12,
-    category: 'Meat',
+    category: 'Meat & Fish',
+    subcategory: 'Fresh Fish',
     sku: 'MET-SAL-067',
     images: [
       'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&h=600&fit=crop',
@@ -2290,7 +2294,8 @@ const productsData = [
     rating: 4.8,
     reviews: 92,
     inStock: 18,
-    category: 'Meat',
+    category: 'Meat & Fish',
+    subcategory: 'Seafood',
     sku: 'MET-PRW-068',
     images: [
       'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=600&h=600&fit=crop',
@@ -2313,7 +2318,8 @@ const productsData = [
     rating: 4.7,
     reviews: 85,
     inStock: 30,
-    category: 'Meat',
+    category: 'Meat & Fish',
+    subcategory: 'Chicken',
     sku: 'MET-WNG-069',
     images: [
       'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=600&h=600&fit=crop',
@@ -2336,7 +2342,8 @@ const productsData = [
     rating: 4.6,
     reviews: 70,
     inStock: 22,
-    category: 'Meat',
+    category: 'Meat & Fish',
+    subcategory: 'Fresh Fish',
     sku: 'MET-FIL-070',
     images: [
       'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600&h=600&fit=crop',
@@ -2359,7 +2366,8 @@ const productsData = [
     rating: 4.7,
     reviews: 88,
     inStock: 28,
-    category: 'Meat',
+    category: 'Meat & Fish',
+    subcategory: 'Beef',
     sku: 'MET-GRB-071',
     images: [
       'https://images.unsplash.com/photo-1602470520998-f4a52199a3d6?w=600&h=600&fit=crop',
@@ -2373,8 +2381,9 @@ const productsData = [
     shelfLife: '3 days',
   },
 
+
   // Beverages (10 products)
-  {
+    {
     id: 72,
     name: 'Green Tea Bags',
     brand: 'ACI Limited',
@@ -2385,6 +2394,7 @@ const productsData = [
     reviews: 140,
     inStock: 40,
     category: 'Beverages',
+    subcategory: 'Tea & Coffee',
     sku: 'BEV-GRT-072',
     images: [
       'https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=600&h=600&fit=crop',
@@ -2408,6 +2418,7 @@ const productsData = [
     reviews: 150,
     inStock: 55,
     category: 'Beverages',
+    subcategory: 'Juices',
     sku: 'BEV-ORG-073',
     images: [
       'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&h=600&fit=crop',
@@ -2431,6 +2442,7 @@ const productsData = [
     reviews: 210,
     inStock: 45,
     category: 'Beverages',
+    subcategory: 'Tea & Coffee',
     sku: 'BEV-COF-074',
     images: [
       'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=600&fit=crop',
@@ -2454,6 +2466,7 @@ const productsData = [
     reviews: 180,
     inStock: 80,
     category: 'Beverages',
+    subcategory: 'Soft Drinks',
     sku: 'BEV-COL-075',
     images: [
       'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=600&h=600&fit=crop',
@@ -2477,6 +2490,7 @@ const productsData = [
     reviews: 160,
     inStock: 50,
     category: 'Beverages',
+    subcategory: 'Juices',
     sku: 'BEV-MNG-076',
     images: [
       'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&h=600&fit=crop',
@@ -2500,6 +2514,7 @@ const productsData = [
     reviews: 140,
     inStock: 70,
     category: 'Beverages',
+    subcategory: 'Energy Drinks',
     sku: 'BEV-ENG-077',
     images: [
       'https://images.unsplash.com/photo-1602470520998-f4a52199a3d6?w=600&h=600&fit=crop',
@@ -2523,6 +2538,7 @@ const productsData = [
     reviews: 95,
     inStock: 35,
     category: 'Beverages',
+    subcategory: 'Tea & Coffee',
     sku: 'BEV-LMT-078',
     images: [
       'https://images.unsplash.com/photo-1602470520998-f4a52199a3d6?w=600&h=600&fit=crop',
@@ -2546,6 +2562,7 @@ const productsData = [
     reviews: 175,
     inStock: 60,
     category: 'Beverages',
+    subcategory: 'Health Drinks',
     sku: 'BEV-COC-079',
     images: [
       'https://images.unsplash.com/photo-1602470520998-f4a52199a3d6?w=600&h=600&fit=crop',
@@ -2569,6 +2586,7 @@ const productsData = [
     reviews: 130,
     inStock: 75,
     category: 'Beverages',
+    subcategory: 'Water',
     sku: 'BEV-SPW-080',
     images: [
       'https://images.unsplash.com/photo-1523362628745-0c100150b504?w=600&h=600&fit=crop',
@@ -2592,6 +2610,7 @@ const productsData = [
     reviews: 145,
     inStock: 48,
     category: 'Beverages',
+    subcategory: 'Juices',
     sku: 'BEV-APL-081',
     images: [
       'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&h=600&fit=crop',
@@ -2605,9 +2624,7 @@ const productsData = [
     shelfLife: '6 months',
   },
 
-  // =======================
-  // 🍪 SNACKS (82–91)
-  // =======================
+  // Snacks (10 products: 82-91)
   {
     id: 82,
     name: 'Biscuits Pack',
@@ -2619,6 +2636,7 @@ const productsData = [
     reviews: 220,
     inStock: 120,
     category: 'Snacks',
+    subcategory: 'Biscuits & Cookies',
     sku: 'SNK-BIS-082',
     images: [
       'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&h=600&fit=crop',
@@ -2642,6 +2660,7 @@ const productsData = [
     reviews: 310,
     inStock: 95,
     category: 'Snacks',
+    subcategory: 'Chips & Crisps',
     sku: 'SNK-CHP-083',
     images: [
       'https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=600&h=600&fit=crop',
@@ -2665,6 +2684,7 @@ const productsData = [
     reviews: 420,
     inStock: 85,
     category: 'Snacks',
+    subcategory: 'Chocolates',
     sku: 'SNK-CHO-084',
     images: [
       'https://images.unsplash.com/photo-1511381939415-e44015466834?w=600&h=600&fit=crop',
@@ -2688,6 +2708,7 @@ const productsData = [
     reviews: 165,
     inStock: 55,
     category: 'Snacks',
+    subcategory: 'Nuts & Seeds',
     sku: 'SNK-NUT-085',
     images: [
       'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=600&h=600&fit=crop',
@@ -2711,6 +2732,7 @@ const productsData = [
     reviews: 140,
     inStock: 70,
     category: 'Snacks',
+    subcategory: 'Healthy Snacks',
     sku: 'SNK-POP-086',
     images: [
       'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&h=600&fit=crop',
@@ -2734,6 +2756,7 @@ const productsData = [
     reviews: 200,
     inStock: 90,
     category: 'Snacks',
+    subcategory: 'Biscuits & Cookies',
     sku: 'SNK-CRA-087',
     images: [
       'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=600&h=600&fit=crop',
@@ -2757,6 +2780,7 @@ const productsData = [
     reviews: 155,
     inStock: 45,
     category: 'Snacks',
+    subcategory: 'Healthy Snacks',
     sku: 'SNK-ENG-088',
     images: [
       'https://images.unsplash.com/photo-1516594798947-e65505dbb29d?w=600&h=600&fit=crop',
@@ -2780,6 +2804,7 @@ const productsData = [
     reviews: 185,
     inStock: 40,
     category: 'Snacks',
+    subcategory: 'Nuts & Seeds',
     sku: 'SNK-PNB-089',
     images: [
       'https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=600&h=600&fit=crop',
@@ -2803,6 +2828,7 @@ const productsData = [
     reviews: 170,
     inStock: 80,
     category: 'Snacks',
+    subcategory: 'Biscuits & Cookies',
     sku: 'SNK-WAF-090',
     images: [
       'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=600&h=600&fit=crop',
@@ -2826,6 +2852,7 @@ const productsData = [
     reviews: 135,
     inStock: 60,
     category: 'Snacks',
+    subcategory: 'Chips & Crisps',
     sku: 'SNK-TOR-091',
     images: [
       'https://images.unsplash.com/photo-1613919113640-25732ec5e61f?w=600&h=600&fit=crop',
@@ -2839,9 +2866,7 @@ const productsData = [
     shelfLife: '9 months',
   },
 
-  // ============================
-  // 🌶️ COOKING & SPICES (9)
-  // ============================
+  // Cooking & Spices (9 products: 92-100)
   {
     id: 92,
     name: 'Turmeric Powder 200g',
@@ -2853,6 +2878,7 @@ const productsData = [
     reviews: 260,
     inStock: 140,
     category: 'Cooking & Spices',
+    subcategory: 'Spices',
     sku: 'CSP-TUR-092',
     images: [
       'https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?w=600&h=600&fit=crop',
@@ -2876,6 +2902,7 @@ const productsData = [
     reviews: 240,
     inStock: 130,
     category: 'Cooking & Spices',
+    subcategory: 'Spices',
     sku: 'CSP-CHL-093',
     images: [
       'https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?w=600&h=600&fit=crop',
@@ -2899,6 +2926,7 @@ const productsData = [
     reviews: 210,
     inStock: 110,
     category: 'Cooking & Spices',
+    subcategory: 'Spices',
     sku: 'CSP-CUM-094',
     images: [
       'https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?w=600&h=600&fit=crop',
@@ -2922,6 +2950,7 @@ const productsData = [
     reviews: 195,
     inStock: 125,
     category: 'Cooking & Spices',
+    subcategory: 'Spices',
     sku: 'CSP-COR-095',
     images: [
       'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&h=600&fit=crop',
@@ -2945,6 +2974,7 @@ const productsData = [
     reviews: 300,
     inStock: 100,
     category: 'Cooking & Spices',
+    subcategory: 'Masalas',
     sku: 'CSP-GRM-096',
     images: [
       'https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?w=600&h=600&fit=crop',
@@ -2968,6 +2998,7 @@ const productsData = [
     reviews: 175,
     inStock: 85,
     category: 'Cooking & Spices',
+    subcategory: 'Spices',
     sku: 'CSP-BPP-097',
     images: [
       'https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?w=600&h=600&fit=crop',
@@ -2991,6 +3022,7 @@ const productsData = [
     reviews: 340,
     inStock: 75,
     category: 'Cooking & Spices',
+    subcategory: 'Cooking Oil',
     sku: 'CSP-MUS-098',
     images: [
       'https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?w=600&h=600&fit=crop',
@@ -3014,6 +3046,7 @@ const productsData = [
     reviews: 410,
     inStock: 200,
     category: 'Cooking & Spices',
+    subcategory: 'Salt & Sugar',
     sku: 'CSP-SLT-099',
     images: [
       'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&h=600&fit=crop',
@@ -3037,6 +3070,7 @@ const productsData = [
     reviews: 230,
     inStock: 95,
     category: 'Cooking & Spices',
+    subcategory: 'Sauces & Condiments',
     sku: 'CSP-GGP-100',
     images: [
       'https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?w=600&h=600&fit=crop',
@@ -3049,7 +3083,6 @@ const productsData = [
     origin: 'Bangladesh',
     shelfLife: '9 months',
   },
-
 ];
 
 const createSlug = (name) => {
