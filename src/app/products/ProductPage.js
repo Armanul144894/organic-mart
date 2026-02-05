@@ -69,7 +69,7 @@ function ProductCardGrid({
   return (
     <div className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
       {/* Image */}
-      <Link href={`/${product.id}`}>
+      <Link href={`/${product.slug}`}>
         <div
           className="relative overflow-hidden bg-gray-50"
           style={{ height: 220 }}
@@ -148,8 +148,8 @@ function ProductCardGrid({
               onClick={() => onAddToCart(product)}
               disabled={!product.inStock}
               className={`w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all ${product.inStock
-                  ? "bg-emerald-600 hover:bg-emerald-700 text-white hover:shadow-lg active:scale-90"
-                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white hover:shadow-lg active:scale-90"
+                : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
             >
               <Plus size={18} />
@@ -170,14 +170,17 @@ function ProductCardList({
 }) {
   return (
     <div className="group bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col sm:flex-row h-full">
-      <Link href={`/${product.id}`}>
+      <Link href={`/${product.slug}`}>
         {/* Image */}
         <div
           className="relative overflow-hidden bg-gray-50 sm:w-64 flex-shrink-0"
           style={{ height: 200 }}
         >
           <Image src={product.images[0]}
-            alt={product.name}
+            alt={product.name.toLowerCase()
+              .replace(/&/g, "and")
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/(^-|-$)/g, "")}
             height={200}
             width={400}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -210,9 +213,10 @@ function ProductCardList({
 
       </Link>
 
-      <Link href={`/${product.id}`}></Link>
-        {/* Body */}
-        <div className="p-5 flex flex-col flex-1">
+
+      {/* Body */}
+      <div className="p-5 flex flex-col flex-1">
+        <Link href={`/${product.slug}`}>
           <div className="flex items-start justify-between mb-2">
             <div className="flex-1">
               <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide">
@@ -229,39 +233,39 @@ function ProductCardList({
               </span>
             )}
           </div>
-
-          <div className="flex items-center gap-2 mt-2">
-            <StarRating rating={product.rating} size={14} />
-            <span className="text-sm text-gray-500">
-              {product.rating} ({product.reviews} reviews)
-            </span>
-          </div>
-
-          {/* Price + Add */}
-          <div className="flex items-center justify-between mt-auto pt-4">
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-extrabold text-emerald-600">
-                ৳{product.price}
-              </span>
-              {product.oldPrice && (
-                <span className="text-sm text-gray-400 line-through">
-                  ৳{product.oldPrice}
-                </span>
-              )}
-            </div>
-            <button
-              onClick={() => onAddToCart(product)}
-              disabled={!product.inStock}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-sm transition-all ${product.inStock
-                  ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-md hover:shadow-lg active:scale-95"
-                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                }`}
-            >
-              <ShoppingCart size={18} />
-              Add to Cart
-            </button>
-          </div>
+        </Link>
+        <div className="flex items-center gap-2 mt-2">
+          <StarRating rating={product.rating} size={14} />
+          <span className="text-sm text-gray-500">
+            {product.rating} ({product.reviews} reviews)
+          </span>
         </div>
+
+        {/* Price + Add */}
+        <div className="flex items-center justify-between mt-auto pt-4">
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl font-extrabold text-emerald-600">
+              ৳{product.price}
+            </span>
+            {product.oldPrice && (
+              <span className="text-sm text-gray-400 line-through">
+                ৳{product.oldPrice}
+              </span>
+            )}
+          </div>
+          <button
+            onClick={() => onAddToCart(product)}
+            disabled={!product.inStock}
+            className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-sm transition-all ${product.inStock
+              ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-md hover:shadow-lg active:scale-95"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }`}
+          >
+            <ShoppingCart size={18} />
+            Add to Cart
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -596,8 +600,8 @@ export default function ProductPage() {
                   <button
                     onClick={() => setViewMode("grid")}
                     className={`p-2 rounded-md transition-colors ${viewMode === "grid"
-                        ? "bg-white text-emerald-600 shadow-sm"
-                        : "text-gray-500 hover:text-gray-700"
+                      ? "bg-white text-emerald-600 shadow-sm"
+                      : "text-gray-500 hover:text-gray-700"
                       }`}
                   >
                     <Grid3x3 size={18} />
@@ -605,8 +609,8 @@ export default function ProductPage() {
                   <button
                     onClick={() => setViewMode("list")}
                     className={`p-2 rounded-md transition-colors ${viewMode === "list"
-                        ? "bg-white text-emerald-600 shadow-sm"
-                        : "text-gray-500 hover:text-gray-700"
+                      ? "bg-white text-emerald-600 shadow-sm"
+                      : "text-gray-500 hover:text-gray-700"
                       }`}
                   >
                     <List size={18} />
@@ -672,8 +676,8 @@ export default function ProductPage() {
                   <button
                     key={page}
                     className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${page === 1
-                        ? "bg-emerald-600 text-white"
-                        : "border border-gray-200 text-gray-600 hover:bg-gray-50"
+                      ? "bg-emerald-600 text-white"
+                      : "border border-gray-200 text-gray-600 hover:bg-gray-50"
                       }`}
                   >
                     {page}

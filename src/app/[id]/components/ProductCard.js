@@ -2,8 +2,8 @@
 import { Heart, Plus } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react'
-import StarRating from './StarRating';
 import Link from 'next/link';
+import StarRating from '@/app/components/StarRating';
 
 export default function ProductCard({ product }) {
   const [wishlisted, setWishlisted] = useState(false);

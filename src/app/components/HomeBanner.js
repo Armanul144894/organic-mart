@@ -1,4 +1,5 @@
 import { ArrowRight, Flame } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 export default function HomeBanner({ heroSwiperRef, bannerSlides }) {
@@ -24,9 +25,11 @@ export default function HomeBanner({ heroSwiperRef, bannerSlides }) {
                                         {slide.title}
                                     </h2>
                                     <p className="text-emerald-300 text-sm mt-2 font-medium">{slide.subtitle}</p>
+                                    <Link href={`/products`}>
                                     <button className="mt-5 w-fit bg-white text-emerald-700 font-bold text-sm px-6 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center gap-2">
                                         Shop Now <ArrowRight size={15} />
                                     </button>
+                                    </Link>
                                 </div>
                             </div>
                         ))}

@@ -1,29 +1,30 @@
 // app/[id]/page.js
-// Handles both category and product pages with clean URLs
-// Examples:
-//   /vegetables → Category Page
-//   /123 → Product Page
-
 import { notFound } from "next/navigation";
 import CategoryPage from "./components/CategoryPage";
 import ProductPage from "./components/ProductPage";
+import products from "@/data/products"; // Import your products data
 
 // Category mapping (lowercase category names)
 const categoryMap = {
-  vegetables: "vegetables",
-  fruits: "fruits",
-  dairy: "dairy",
-  grains: "grains",
+  vegetables: "Vegetables",
+  fruits: "Fruits",
+  dairy: "Dairy",
+  grains: "Grains",
+  bakery: "Bakery",
+  "meat-and-fish": "Meat",
+  beverages: "Beverages",
+  snacks: "Snacks",
+  "cooking-and-spices": "Cooking & Spices",
 };
 
-// Check if ID is a number (product)
-function isProductId(id) {
-  return typeof id === "string" && /^\d+$/.test(id);
+// Check if slug exists in products
+function getProductBySlug(slug) {
+  return products.find((product) => product.slug === slug);
 }
 
 export default async function Page({ params }) {
-  const {id} = await params;
-
+  const { id } = await params;
+  
   console.log("PARAMS:", id);
 
   // Guard: if id is missing
@@ -31,41 +32,44 @@ export default async function Page({ params }) {
     notFound();
   }
 
-  // Product page
-  if (isProductId(id)) {
-    return <ProductPage productId={Number(id)} />;
+  // Check if it's a product slug
+  const product = getProductBySlug(id);
+  if (product) {
+    return <ProductPage productSlug={id} />;
   }
 
-  // Category page
+  // Check if it's a category
   const categoryKey = id.toLowerCase();
   if (categoryMap[categoryKey]) {
-    return <CategoryPage categoryId={categoryMap[categoryKey]} />;
+    return <CategoryPage category={categoryMap[categoryKey]} />;
   }
 
   // Not found
   notFound();
 }
 
-/* --------------------------------------------------
-   Static Params (SSG)
+/* -------------------------------------------------- 
+   Static Params (SSG) 
 -------------------------------------------------- */
 export async function generateStaticParams() {
+  // Generate params for all categories
   const categoryParams = Object.keys(categoryMap).map((category) => ({
     id: category,
   }));
 
-  const productParams = [1, 2, 3, 4, 5, 11, 19, 23].map((id) => ({
-    id: id.toString(),
+  // Generate params for all products using their slugs
+  const productParams = products.map((product) => ({
+    id: product.slug,
   }));
 
   return [...categoryParams, ...productParams];
 }
 
-/* --------------------------------------------------
-   Metadata
+/* -------------------------------------------------- 
+   Metadata 
 -------------------------------------------------- */
 export async function generateMetadata({ params }) {
-  const {id} = await params;
+  const { id } = await params;
 
   if (!id || typeof id !== "string") {
     return {
@@ -73,18 +77,19 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  if (isProductId(id)) {
+  // Check if it's a product
+  const product = getProductBySlug(id);
+  if (product) {
     return {
-      title: `Product ${id} - OrganicMart`,
-      description: `View details for product ${id}`,
+      title: `${product.name} - OrganicMart`,
+      description: product.description,
     };
   }
 
+  // Check if it's a category
   const categoryKey = id.toLowerCase();
   if (categoryMap[categoryKey]) {
-    const categoryName =
-      categoryKey.charAt(0).toUpperCase() + categoryKey.slice(1);
-
+    const categoryName = categoryMap[categoryKey];
     return {
       title: `${categoryName} - OrganicMart`,
       description: `Browse our fresh ${categoryName}`,

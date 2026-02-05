@@ -14,127 +14,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import CartOffcanvas from "./CartOffcanvas";
+import categories from "@/data/categories";
 
 // ─── CATEGORY DATA WITH SUBCATEGORIES ────────────────────────────────────────
-const categoryData = [
-  {
-    id: 1,
-    name: "Vegetables",
-    emoji: "🥬",
-    subcategories: [
-      "Leafy Greens",
-      "Root Vegetables",
-      "Cruciferous",
-      "Nightshades",
-      "Herbs",
-      "Exotic Vegetables",
-    ],
-  },
-  {
-    id: 2,
-    name: "Fruits",
-    emoji: "🍎",
-    subcategories: [
-      "Tropical Fruits",
-      "Citrus Fruits",
-      "Berries",
-      "Stone Fruits",
-      "Melons",
-      "Exotic Fruits",
-    ],
-  },
-  {
-    id: 3,
-    name: "Dairy",
-    emoji: "🥛",
-    subcategories: [
-      "Milk & Cream",
-      "Cheese",
-      "Yogurt",
-      "Butter & Ghee",
-      "Eggs",
-      "Plant-Based Dairy",
-    ],
-  },
-  {
-    id: 4,
-    name: "Bakery",
-    emoji: "🍞",
-    subcategories: [
-      "Bread",
-      "Cakes & Pastries",
-      "Cookies",
-      "Buns & Rolls",
-      "Donuts",
-      "Specialty Breads",
-    ],
-  },
-  {
-    id: 5,
-    name: "Meat & Fish",
-    emoji: "🍖",
-    subcategories: [
-      "Chicken",
-      "Beef",
-      "Mutton",
-      "Fresh Fish",
-      "Frozen Fish",
-      "Seafood",
-    ],
-  },
-  {
-    id: 6,
-    name: "Beverages",
-    emoji: "🥤",
-    subcategories: [
-      "Tea & Coffee",
-      "Juices",
-      "Soft Drinks",
-      "Energy Drinks",
-      "Water",
-      "Health Drinks",
-    ],
-  },
-  {
-    id: 7,
-    name: "Snacks",
-    emoji: "🍪",
-    subcategories: [
-      "Chips & Crisps",
-      "Biscuits & Cookies",
-      "Namkeen",
-      "Chocolates",
-      "Nuts & Seeds",
-      "Healthy Snacks",
-    ],
-  },
-  {
-    id: 8,
-    name: "Grains",
-    emoji: "🌾",
-    subcategories: [
-      "Rice",
-      "Wheat & Flour",
-      "Pulses & Lentils",
-      "Oats & Cereals",
-      "Pasta & Noodles",
-      "Specialty Grains",
-    ],
-  },
-  {
-    id: 9,
-    name: "Cooking Essentials",
-    emoji: "🌶️",
-    subcategories: [
-      "Cooking Oil",
-      "Spices",
-      "Salt & Sugar",
-      "Sauces & Condiments",
-      "Masalas",
-      "Vinegar & Pickles",
-    ],
-  },
-];
+const categoryData = categories;
 
 export default function Header({ cartCount = 3 }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -216,11 +99,10 @@ export default function Header({ cartCount = 3 }) {
             ].map((a, i) => (
               <button
                 key={i}
-                className={`relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors ${
-                  a.primary
-                    ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                    : "text-gray-600 hover:bg-gray-100"
-                }`}
+                className={`relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors ${a.primary
+                  ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                  : "text-gray-600 hover:bg-gray-100"
+                  }`}
               >
                 {a.icon}
                 <span className="text-xs font-semibold">{a.label}</span>
@@ -281,7 +163,10 @@ export default function Header({ cartCount = 3 }) {
                     {categoryData.map((cat) => (
                       <div key={cat.id} className="group">
                         <Link
-                          href="#"
+                          href={`/${cat.name.toLowerCase()
+                            .replace(/&/g, "and")
+                            .replace(/[^a-z0-9]+/g, "-")
+                            .replace(/(^-|-$)/g, "")}`}
                           className="flex items-center gap-2 font-bold text-gray-800 text-sm mb-2 hover:text-emerald-600 transition-colors"
                         >
                           <span className="text-lg">{cat.emoji}</span>
@@ -291,7 +176,10 @@ export default function Header({ cartCount = 3 }) {
                           {cat.subcategories.map((sub, idx) => (
                             <li key={idx}>
                               <Link
-                                href="#"
+                                href={`/${sub.toLowerCase()
+                                  .replace(/&/g, "and")
+                                  .replace(/[^a-z0-9]+/g, "-")
+                                  .replace(/(^-|-$)/g, "")}`}
                                 className="text-xs text-gray-500 hover:text-emerald-600 hover:translate-x-1 transition-all inline-block"
                               >
                                 {sub}
@@ -411,10 +299,15 @@ export default function Header({ cartCount = 3 }) {
                       }
                       className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg transition-colors"
                     >
-                      <span className="flex items-center gap-2">
-                        <span className="text-lg">{cat.emoji}</span>
-                        {cat.name}
-                      </span>
+                      <Link href={`/${cat.name.toLowerCase()
+                        .replace(/&/g, "and")
+                        .replace(/[^a-z0-9]+/g, "-")
+                        .replace(/(^-|-$)/g, "")}`}>
+                        <span className="flex items-center gap-2">
+                          <span className="text-lg">{cat.emoji}</span>
+                          {cat.name}
+                        </span>
+                      </Link>
                       <ChevronRight
                         size={16}
                         className={`transition-transform ${activeMobileCategory === cat.id ? "rotate-90" : ""}`}
@@ -427,7 +320,10 @@ export default function Header({ cartCount = 3 }) {
                         {cat.subcategories.map((sub, idx) => (
                           <Link
                             key={idx}
-                            href="#"
+                            href={`/${sub.toLowerCase()
+                              .replace(/&/g, "and")
+                              .replace(/[^a-z0-9]+/g, "-")
+                              .replace(/(^-|-$)/g, "")}`}
                             className="block text-xs text-gray-500 hover:text-emerald-600 py-1 transition-colors"
                           >
                             {sub}
@@ -478,7 +374,7 @@ export default function Header({ cartCount = 3 }) {
         </>
       )}
 
-      <CartOffcanvas isOpen={isOpen} setIsOpen={setIsOpen}/>
+      <CartOffcanvas isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 }

@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Star,
   Heart,
@@ -18,17 +18,10 @@ import {
 import Link from "next/link";
 import products from "@/data/products";
 import Image from "next/image";
+import RelatedProduct from "./RelatedProduct";
 
 // ─── ALL PRODUCTS DATA ───────────────────────────────────────────────────────
 const allProductsData = products;
-
-// ─── RELATED PRODUCTS ────────────────────────────────────────────────────────
-const relatedProducts = [
-  { id: 3, name: "Fresh Organic Carrots", price: 40, oldPrice: 50, rating: 4.6, image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400&h=400&fit=crop" },
-  { id: 4, name: "Fresh Cucumber", price: 25, oldPrice: 35, rating: 4.4, image: "https://images.unsplash.com/photo-1604977042946-1eecc30f269e?w=400&h=400&fit=crop" },
-  { id: 5, name: "Green Capsicum", price: 55, oldPrice: 70, rating: 4.5, image: "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=400&h=400&fit=crop" },
-  { id: 6, name: "Red Onions", price: 35, oldPrice: 45, rating: 4.3, image: "https://images.unsplash.com/photo-1580201092675-a0a6a6cafbb1?w=400&h=400&fit=crop" },
-];
 
 // ─── CUSTOMER REVIEWS ────────────────────────────────────────────────────────
 const customerReviews = [
@@ -66,10 +59,12 @@ function StarRating({ rating, size = 16, showNumber = false }) {
 }
 
 // ─── PRODUCT PAGE COMPONENT ──────────────────────────────────────────────────
-export default function ProductPage({ productId }) {
-  const product = allProductsData[productId];
+export default function ProductPage({ productSlug }) {
+  const product = allProductsData.find((p) => p.name.toLowerCase()
+          .replace(/&/g, "and")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "") === productSlug);
 
-  console.log(product)
   // If product not found, show 404
   if (!product) {
     return (
@@ -87,6 +82,34 @@ export default function ProductPage({ productId }) {
       </div>
     );
   }
+
+  const selectedProduct = useMemo(() => {
+    return allProductsData.find(
+      (p) =>
+        p?.name
+          .toLowerCase()
+          .replace(/&/g, "and")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "") === productSlug
+    );
+  }, [productSlug]);
+
+  const category = selectedProduct?.category.toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+
+  const relatedProducts = allProductsData.filter(
+      (p) =>
+        p?.name !== selectedProduct?.name && 
+        p?.category
+          .toLowerCase()
+          .replace(/&/g, "and")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "") === category
+    );
+
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -182,11 +205,11 @@ export default function ProductPage({ productId }) {
                       : "border-gray-100 hover:border-gray-300"
                   }`}
                 >
-                  <img
-                    src={img}
+                  <Image src={img}
                     alt={`${product.name} ${idx + 1}`}
-                    className="w-full aspect-square object-cover"
-                  />
+                    height={200}
+                    width={200}
+                    className="w-full aspect-square object-cover"/>
                 </button>
               ))}
             </div>
@@ -455,44 +478,7 @@ export default function ProductPage({ productId }) {
         </div>
 
         {/* Related Products */}
-        <div>
-          <h2 className="text-2xl font-extrabold text-gray-800 mb-6">
-            Related Products
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            {relatedProducts.map((p) => (
-              <Link
-                key={p.id}
-                href={`/${p.id}`}
-                className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow group"
-              >
-                <div className="relative aspect-square overflow-hidden bg-gray-50">
-                  <img
-                    src={p.image}
-                    alt={p.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-sm text-gray-800 mb-2 line-clamp-2">
-                    {p.name}
-                  </h3>
-                  <div className="flex items-center gap-1 mb-2">
-                    <StarRating rating={p.rating} size={12} />
-                  </div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-lg font-extrabold text-emerald-600">
-                      ৳{p.price}
-                    </span>
-                    <span className="text-xs text-gray-400 line-through">
-                      ৳{p.oldPrice}
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
+        <RelatedProduct relatedProducts={relatedProducts}/>
       </div>
     </div>
   );
