@@ -11,7 +11,7 @@ const categoryMap = {
   dairy: "Dairy",
   grains: "Grains",
   bakery: "Bakery",
-  "meat-and-fish": "Meat",
+  "meat-and-fish": "Meat & Fish",
   beverages: "Beverages",
   snacks: "Snacks",
   "cooking-and-spices": "Cooking & Spices",
