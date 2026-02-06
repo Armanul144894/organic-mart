@@ -121,7 +121,7 @@ export default function Checkout() {
                             <Home size={16} /> Home
                         </Link>
                         <ChevronRight size={14} />
-                        <Link href="3" className="hover:text-emerald-600 transition-colors">
+                        <Link href="#" className="hover:text-emerald-600 transition-colors">
                             Cart
                         </Link>
                         <ChevronRight size={14} />

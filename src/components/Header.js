@@ -80,7 +80,7 @@ export default function Header({ cartCount = 3 }) {
           </Link>
 
           {/* search - hidden on mobile */}
-          <div className="flex-1 max-w-xl hidden md:flex">
+          <div className="flex-1 max-w-xl hidden lg:flex">
             <input
               type="text"
               placeholder="Search for products, brands and more…"
@@ -92,7 +92,7 @@ export default function Header({ cartCount = 3 }) {
           </div>
 
           {/* actions - hidden on small screens */}
-          <div className="hidden sm:flex items-center gap-2 ml-auto">
+          <div className="hidden lg:flex items-center gap-2 ml-auto">
             {[
               { icon: <User size={20} />, label: "Account", badge: null },
               { icon: <Heart size={20} />, label: "Wishlist", badge: 3 },
@@ -132,7 +132,7 @@ export default function Header({ cartCount = 3 }) {
 
           {/* mobile hamburger */}
           <button
-            className="sm:hidden ml-auto text-gray-600"
+            className="lg:hidden ml-auto text-gray-600"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -140,7 +140,7 @@ export default function Header({ cartCount = 3 }) {
         </div>
 
         {/* ═══════════ DESKTOP NAVIGATION ═══════════ */}
-        <div className="border-t border-gray-100 hidden sm:block">
+        <div className="border-t border-gray-100 hidden lg:block">
           <div className="container mx-auto px-4">
             <nav className="flex items-center">
               {/* All Categories with Mega Menu */}
@@ -159,7 +159,7 @@ export default function Header({ cartCount = 3 }) {
 
                 {/* Mega Menu Dropdown */}
                 {showCategoryMenu && (
-                  <div className="absolute left-0 top-full w-[700px] lg:w-[800px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 grid grid-cols-3 gap-x-6 gap-y-4 z-50">
+                  <div className="absolute left-0 top-full w-[700px] lg:w-[980px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 grid grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-4 z-50">
                     {categoryData.map((cat) => (
                       <div key={cat.id} className="group">
                         <Link
@@ -211,7 +211,7 @@ export default function Header({ cartCount = 3 }) {
 
         {/* ═══════════ MOBILE SEARCH (visible when menu closed) ═══════════ */}
         {!menuOpen && (
-          <div className="md:hidden border-t border-gray-100 px-4 py-2">
+          <div className="lg:hidden border-t border-gray-100 px-4 py-2">
             <div className="flex">
               <input
                 type="text"
@@ -231,12 +231,12 @@ export default function Header({ cartCount = 3 }) {
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/50 z-40 sm:hidden"
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
             onClick={() => setMenuOpen(false)}
           />
 
           {/* Offcanvas Panel */}
-          <div className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white z-50 shadow-2xl overflow-y-auto sm:hidden animate-slide-in">
+          <div className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white z-50 shadow-2xl overflow-y-auto lg:hidden animate-slide-in">
             {/* Header */}
             <div className="bg-emerald-600 text-white p-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -272,9 +272,9 @@ export default function Header({ cartCount = 3 }) {
                   )}
                 </button>
               ))}
-              <button onClick={() => setIsOpen(true) || setMenuOpen(false)} className="relative flex flex-col items-center gap-1.5 p-3 rounded-xl bg-gray-50 hover:bg-emerald-50 transition-colors">
+              <button onClick={() => setIsOpen(true) || setMenuOpen(false)} className="relative text-white flex flex-col items-center gap-1.5 p-3 rounded-xl bg-emerald-600 hover:bg-emerald-50 transition-colors">
                 <ShoppingCart size={20} />
-                <span className="text-xs font-semibold text-gray-700">
+                <span className="text-xs font-semibold text-gray-50">
                   Cart
                 </span>
                 {cartCount > 0 && (
