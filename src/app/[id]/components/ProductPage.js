@@ -60,6 +60,11 @@ function StarRating({ rating, size = 16, showNumber = false }) {
 
 // ─── PRODUCT PAGE COMPONENT ──────────────────────────────────────────────────
 export default function ProductPage({ productSlug }) {
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [wishlisted, setWishlisted] = useState(false);
+  const [activeTab, setActiveTab] = useState("description");
+
   const product = allProductsData.find((p) => p.name.toLowerCase()
     .replace(/&/g, "and")
     .replace(/[^a-z0-9]+/g, "-")
@@ -83,16 +88,14 @@ export default function ProductPage({ productSlug }) {
     );
   }
 
-  const selectedProduct = useMemo(() => {
-    return allProductsData.find(
-      (p) =>
-        p?.name
-          .toLowerCase()
-          .replace(/&/g, "and")
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/(^-|-$)/g, "") === productSlug
-    );
-  }, [productSlug]);
+  const selectedProduct = allProductsData.find(
+    (p) =>
+      p?.name
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "") === productSlug
+  );
 
   const category = selectedProduct?.category.toLowerCase()
     .replace(/&/g, "and")
@@ -109,13 +112,6 @@ export default function ProductPage({ productSlug }) {
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "") === category
   );
-
-
-  const [selectedImage, setSelectedImage] = useState(0);
-  const [quantity, setQuantity] = useState(1);
-  const [wishlisted, setWishlisted] = useState(false);
-  const [activeTab, setActiveTab] = useState("description");
-
   const incrementQuantity = () => {
     if (quantity < product.stockCount) setQuantity(quantity + 1);
   };
