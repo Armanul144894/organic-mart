@@ -62,8 +62,8 @@ export default function RelatedProduct({ relatedProducts }) {
           className="w-full max-w-full"
         >
           {relatedProducts?.map((item) => (
-            <SwiperSlide key={item?.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
-              <Link href={`/${item?.id}`}>
+            <SwiperSlide key={item?.name} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+              <Link href={`/${item?.slug}`}>
                 <ProductCard product={item}/>
               </Link>
             </SwiperSlide>

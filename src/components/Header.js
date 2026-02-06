@@ -27,11 +27,11 @@ export default function Header({ cartCount = 3 }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { label: "🔥 Hot Deals", href: "#" },
-    { label: "🆕 New Arrivals", href: "#" },
-    { label: "🏆 Best Sellers", href: "#" },
-    { label: "💰 Weekly Offers", href: "#" },
-    { label: "🎁 Gift Cards", href: "#" },
+    { label: "🔥 Hot Deals", href: "/products" },
+    { label: "🆕 New Arrivals", href: "/products" },
+    { label: "🏆 Best Sellers", href: "/products" },
+    { label: "💰 Weekly Offers", href: "/products" },
+    { label: "🎁 Gift Cards", href: "/products" },
   ];
 
   return (
@@ -167,6 +167,7 @@ export default function Header({ cartCount = 3 }) {
                             .replace(/&/g, "and")
                             .replace(/[^a-z0-9]+/g, "-")
                             .replace(/(^-|-$)/g, "")}`}
+                          onClick={() => setShowCategoryMenu(false)}
                           className="flex items-center gap-2 font-bold text-gray-800 text-sm mb-2 hover:text-emerald-600 transition-colors"
                         >
                           <span className="text-lg">{cat.emoji}</span>
@@ -180,6 +181,7 @@ export default function Header({ cartCount = 3 }) {
                                   .replace(/&/g, "and")
                                   .replace(/[^a-z0-9]+/g, "-")
                                   .replace(/(^-|-$)/g, "")}`}
+                                onClick={() => setShowCategoryMenu(false)}
                                 className="text-xs text-gray-500 hover:text-emerald-600 hover:translate-x-1 transition-all inline-block"
                               >
                                 {sub}
@@ -270,7 +272,7 @@ export default function Header({ cartCount = 3 }) {
                   )}
                 </button>
               ))}
-              <button onClick={() => setIsOpen(true)} className="relative flex flex-col items-center gap-1.5 p-3 rounded-xl bg-gray-50 hover:bg-emerald-50 transition-colors">
+              <button onClick={() => setIsOpen(true) || setMenuOpen(false)} className="relative flex flex-col items-center gap-1.5 p-3 rounded-xl bg-gray-50 hover:bg-emerald-50 transition-colors">
                 <ShoppingCart size={20} />
                 <span className="text-xs font-semibold text-gray-700">
                   Cart
@@ -302,7 +304,9 @@ export default function Header({ cartCount = 3 }) {
                       <Link href={`/${cat.name.toLowerCase()
                         .replace(/&/g, "and")
                         .replace(/[^a-z0-9]+/g, "-")
-                        .replace(/(^-|-$)/g, "")}`}>
+                        .replace(/(^-|-$)/g, "")}`}
+                        onClick={() => setMenuOpen(false)} >
+
                         <span className="flex items-center gap-2">
                           <span className="text-lg">{cat.emoji}</span>
                           {cat.name}
@@ -324,6 +328,7 @@ export default function Header({ cartCount = 3 }) {
                               .replace(/&/g, "and")
                               .replace(/[^a-z0-9]+/g, "-")
                               .replace(/(^-|-$)/g, "")}`}
+                            onClick={() => setMenuOpen(false)}
                             className="block text-xs text-gray-500 hover:text-emerald-600 py-1 transition-colors"
                           >
                             {sub}
@@ -346,6 +351,7 @@ export default function Header({ cartCount = 3 }) {
                   <Link
                     key={i}
                     href={link.href}
+                    onClick={() => setMenuOpen(false)}
                     className="block px-3 py-2.5 text-sm font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg transition-colors"
                   >
                     {link.label}

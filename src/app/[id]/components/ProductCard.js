@@ -9,7 +9,7 @@ export default function ProductCard({ product }) {
   const [wishlisted, setWishlisted] = useState(false);
   return (
     <div className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col">
-      <Link href={`${product.slug}`}>
+      <Link href={`${product?.slug}`}>
         {/* image */}
         <div className="relative overflow-hidden bg-gray-50" style={{ height: 220 }}>
 
