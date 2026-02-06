@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
+import SectionTitle from './SectionTitle';
 
 const weeklyOffers = [
   { id: 1, title: "Fresh Vegetables", discount: "30% OFF", desc: "On all organic vegetables", image: "https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=700&h=400&fit=crop", badge: "Limited" },
   { id: 2, title: "Dairy Products", discount: "25% OFF", desc: "Fresh milk, cheese & butter", image: "https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=700&h=400&fit=crop", badge: "Hot" },
   { id: 3, title: "Snacks & Treats", discount: "20% OFF", desc: "Your favourite snack combos", image: "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=700&h=400&fit=crop", badge: "New" },
 ];
-export default function WeeklyOffer({ SectionTitle }) {
+export default function WeeklyOffer() {
   return (
     <div>
       <Link href='/products'>

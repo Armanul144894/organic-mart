@@ -1,7 +1,8 @@
 import React from 'react'
 import ProductCard from './ProductCard'
+import SectionTitle from './SectionTitle'
 
-export default function HotDeals({hotDeals, SectionTitle}) {
+export default function HotDeals({hotDeals}) {
   return (
     <div>
         <section className="container mx-auto px-4 py-4">

@@ -24,7 +24,6 @@ import Newsletter from "./components/Newsletter";
 import products from "@/data/products";
 import categories from "@/data/categories";
 import DairyProducts from "./components/DairyProducts";
-import Header from "@/components/Header";
 import Link from "next/link";
 import MeatAndFish from "./components/MeatAndFish";
 
@@ -108,8 +107,6 @@ export default function EcommerceHomepage() {
   const meatFishSwiperRef = useRef(null);
   const brandSwiperRef = useRef(null);
 
-  // ── mobile menu ──
-  const [menuOpen, setMenuOpen] = useState(false);
 
   // ── Swiper init helper ──
   const initSwiper = useCallback((container, options = {}) => {

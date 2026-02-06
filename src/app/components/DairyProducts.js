@@ -1,8 +1,9 @@
 
 import React from "react";
 import ProductCard from "./ProductCard";
+import SectionTitle from "./SectionTitle";
 
-export default function DairyProducts({ dairyProducts, dairySwiperRef, SectionTitle }) {
+export default function DairyProducts({ dairyProducts, dairySwiperRef }) {
   return (
     <div>
       <section className="container mx-auto px-4 py-6">

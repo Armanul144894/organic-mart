@@ -1,6 +1,7 @@
 import React from "react";
+import SectionTitle from "./SectionTitle";
 
-export default function PopularBrand({ brands,brandSwiperRef, SectionTitle }) {
+export default function PopularBrand({ brands,brandSwiperRef }) {
   return (
     <div>
       <section className="container mx-auto px-4 py-6">

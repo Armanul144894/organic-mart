@@ -5,8 +5,9 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import CategoryCard from "./CategoryCard";
+import SectionTitle from "./SectionTitle";
 
-export default function CategorySlider({ categories,categorySwiperRef, SectionTitle }) {
+export default function CategorySlider({ categories,categorySwiperRef }) {
   return (
     <section className="container mx-auto px-4 py-7">
       <SectionTitle

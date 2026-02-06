@@ -4,8 +4,9 @@ import ProductCard from "./ProductCard";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import SectionTitle from "./SectionTitle";
 
-export default function FreshFruits({ fruitProducts, fruitSwiperRef, SectionTitle }) {
+export default function FreshFruits({ fruitProducts, fruitSwiperRef }) {
   return (
     <div>
       <section className="container mx-auto px-4 py-6">
