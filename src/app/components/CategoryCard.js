@@ -21,6 +21,7 @@ export default function CategoryCard({ cat }) {
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
         {/* color-gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-black/20" />
         <div
           className={`absolute inset-0 bg-gradient-to-t ${cat.color} opacity-55 group-hover:opacity-70 transition-opacity`}
         />

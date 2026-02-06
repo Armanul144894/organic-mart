@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
@@ -19,7 +20,7 @@ export default function WeeklyOffer({ SectionTitle }) {
                 className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
                 style={{ height: 240 }}
               >
-                <img src={offer.image} alt={offer.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <Image src={offer.image} alt={offer.title} height={300} width={600} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/20" />
                 <div className="absolute inset-0 flex flex-col justify-center px-5 text-white">
                   <span className="inline-flex bg-red-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full w-fit">{offer.badge}</span>
