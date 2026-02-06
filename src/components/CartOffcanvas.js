@@ -332,7 +332,7 @@ export default function CartOffcanvas({ isOpen, setIsOpen }) {
 
               {/* Checkout Buttons */}
               <div className="space-y-3">
-                <Link href="#" onClick={handleCheckoutClick}>
+                <Link href="/checkout" onClick={handleCheckoutClick}>
                   <button className="w-full mb-2 bg-emerald-600 text-white py-3 rounded-lg hover:bg-secondary transition font-semibold flex items-center justify-center gap-2">
                     Proceed to Checkout <ArrowRight size={18} />
                   </button>
