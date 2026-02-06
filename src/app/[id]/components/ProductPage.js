@@ -158,6 +158,16 @@ export default function ProductPage({ productSlug }) {
               {product.category}
             </Link>
             <ChevronRight size={14} />
+            <Link
+              href={`/${product.subcategory.toLowerCase()
+                .replace(/&/g, "and")
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/(^-|-$)/g, "")}`}
+              className="hover:text-emerald-600 transition-colors"
+            >
+              {product.subcategory}
+            </Link>
+            <ChevronRight size={14} />
             <span className="text-gray-800 font-semibold truncate max-w-xs">
               {product.name}
             </span>
@@ -203,8 +213,8 @@ export default function ProductPage({ productSlug }) {
                   key={idx}
                   onClick={() => setSelectedImage(idx)}
                   className={`bg-white rounded-xl border-2 overflow-hidden transition-all ${selectedImage === idx
-                      ? "border-emerald-600 shadow-md"
-                      : "border-gray-100 hover:border-gray-300"
+                    ? "border-emerald-600 shadow-md"
+                    : "border-gray-100 hover:border-gray-300"
                     }`}
                 >
                   <Image src={img}
@@ -394,8 +404,8 @@ export default function ProductPage({ productSlug }) {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`py-4 font-semibold text-sm relative transition-colors ${activeTab === tab.id
-                      ? "text-emerald-600"
-                      : "text-gray-500 hover:text-gray-700"
+                    ? "text-emerald-600"
+                    : "text-gray-500 hover:text-gray-700"
                     }`}
                 >
                   {tab.label}

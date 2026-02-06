@@ -117,11 +117,10 @@ function ProductCardGrid({ product, onAddToCart, onToggleWishlist, isWishlisted 
               onAddToCart(product);
             }}
             disabled={!product.inStock}
-            className={`w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all ${
-              product.inStock
+            className={`w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all ${product.inStock
                 ? "bg-emerald-600 hover:bg-emerald-700 text-white hover:shadow-lg active:scale-90"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            }`}
+              }`}
           >
             <Plus size={18} />
           </button>
@@ -210,11 +209,10 @@ function ProductCardList({ product, onAddToCart, onToggleWishlist, isWishlisted 
               onAddToCart(product);
             }}
             disabled={!product.inStock}
-            className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-sm transition-all ${
-              product.inStock
+            className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-sm transition-all ${product.inStock
                 ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-md hover:shadow-lg active:scale-95"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            }`}
+              }`}
           >
             <Plus size={18} />
             Add to Cart
@@ -279,16 +277,16 @@ export default function SubcategoryPage({
   // Apply filters
   let filteredProducts = products.filter((p) => {
     if (selectedBrands.length && !selectedBrands.includes(p.brand)) return false;
-    
+
     const selectedRange = priceRanges.find((r) => r.value === priceRange);
     if (selectedRange && selectedRange.min !== undefined) {
       if (p.price < selectedRange.min || p.price > selectedRange.max) return false;
     }
-    
+
     if (minRating > 0 && p.rating < minRating) return false;
     if (showOnSale && p.discount === 0) return false;
     if (showInStock && !p.inStock) return false;
-    
+
     return true;
   });
 
@@ -320,7 +318,10 @@ export default function SubcategoryPage({
               Home
             </Link>
             <span>/</span>
-            <Link href={`/${categorySlug}`} className="hover:text-emerald-600 transition-colors">
+            <Link href={`/${category.toLowerCase()
+              .replace(/&/g, "and")
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/(^-|-$)/g, "")}`} className="hover:text-emerald-600 transition-colors">
               {category}
             </Link>
             <span>/</span>
@@ -345,9 +346,8 @@ export default function SubcategoryPage({
         <div className="flex gap-6">
           {/* Sidebar Filters */}
           <aside
-            className={`${
-              showFilters ? "block" : "hidden"
-            } lg:block fixed lg:sticky top-0 left-0 h-screen lg:h-auto w-80 lg:w-64 bg-white lg:bg-transparent z-40 lg:z-0 shadow-2xl lg:shadow-none`}
+            className={`${showFilters ? "block" : "hidden"
+              } lg:block fixed lg:sticky top-0 left-0 h-screen lg:h-auto w-80 lg:w-64 bg-white lg:bg-transparent z-40 lg:z-0 shadow-2xl lg:shadow-none`}
           >
             <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden lg:sticky lg:top-40 h-full lg:h-auto flex flex-col lg:max-h-[calc(100vh-10rem)]">
               <div className="flex items-center justify-between p-4 border-b border-gray-100 lg:hidden flex-shrink-0">
@@ -532,21 +532,19 @@ export default function SubcategoryPage({
                 <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
                   <button
                     onClick={() => setViewMode("grid")}
-                    className={`p-2 rounded-md transition-colors ${
-                      viewMode === "grid"
+                    className={`p-2 rounded-md transition-colors ${viewMode === "grid"
                         ? "bg-white text-emerald-600 shadow-sm"
                         : "text-gray-500 hover:text-gray-700"
-                    }`}
+                      }`}
                   >
                     <Grid3x3 size={18} />
                   </button>
                   <button
                     onClick={() => setViewMode("list")}
-                    className={`p-2 rounded-md transition-colors ${
-                      viewMode === "list"
+                    className={`p-2 rounded-md transition-colors ${viewMode === "list"
                         ? "bg-white text-emerald-600 shadow-sm"
                         : "text-gray-500 hover:text-gray-700"
-                    }`}
+                      }`}
                   >
                     <List size={18} />
                   </button>
