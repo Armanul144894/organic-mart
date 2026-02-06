@@ -26,6 +26,7 @@ import categories from "@/data/categories";
 import DairyProducts from "./components/DairyProducts";
 import Header from "@/components/Header";
 import Link from "next/link";
+import MeatAndFish from "./components/MeatAndFish";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const bannerSlides = [
@@ -83,7 +84,7 @@ function SectionTitle({ icon, title, sub, viewAll }) {
       </div>
       {viewAll && (
         <Link
-          href="#"
+          href={`${viewAll}`}
           className="text-emerald-600 text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all"
         >
           View All <ArrowRight size={15} />
@@ -104,6 +105,7 @@ export default function EcommerceHomepage() {
   const vegSwiperRef = useRef(null);
   const fruitSwiperRef = useRef(null);
   const dairySwiperRef = useRef(null);
+  const meatFishSwiperRef = useRef(null);
   const brandSwiperRef = useRef(null);
 
   // ── mobile menu ──
@@ -228,6 +230,18 @@ export default function EcommerceHomepage() {
         },
       });
     }
+    // Dairy products
+    if (meatFishSwiperRef.current && !meatFishSwiperRef.current.swiper) {
+      initSwiper(meatFishSwiperRef.current, {
+        spaceBetween: 16,
+        slidesPerView: "auto",
+        navigation: {
+          nextEl: meatFishSwiperRef.current.querySelector(".swiper-button-next"),
+          prevEl: meatFishSwiperRef.current.querySelector(".swiper-button-prev"),
+        },
+      });
+    }
+
     // Brands
     if (brandSwiperRef.current && !brandSwiperRef.current.swiper) {
       initSwiper(brandSwiperRef.current, {
@@ -243,6 +257,7 @@ export default function EcommerceHomepage() {
   const vegProducts = allProducts.filter((p) => p.category === "Vegetables");
   const fruitProducts = allProducts.filter((p) => p.category === "Fruits");
   const dairyProducts = allProducts.filter((p) => p.category === "Dairy");
+  const meatFishProducts = allProducts.filter((p) => p.category === "Meat & Fish");
   const hotDeals = [...allProducts]
     .sort((a, b) => b.discount - a.discount)
     .slice(0, 8);
@@ -300,6 +315,13 @@ export default function EcommerceHomepage() {
       <DairyProducts
         dairyProducts={dairyProducts}
         dairySwiperRef={dairySwiperRef}
+        SectionTitle={SectionTitle}
+      />
+
+      {/* ═══════════ FRUITS SWIPER ═══════════ */}
+      <MeatAndFish
+        meatFishProducts={meatFishProducts}
+        meatFishSwiperRef={meatFishSwiperRef}
         SectionTitle={SectionTitle}
       />
 

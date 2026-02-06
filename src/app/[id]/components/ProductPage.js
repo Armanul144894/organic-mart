@@ -45,8 +45,8 @@ function StarRating({ rating, size = 16, showNumber = false }) {
               i < full
                 ? "fill-amber-400 text-amber-400"
                 : i === full && half
-                ? "fill-amber-400 text-amber-400"
-                : "text-gray-300"
+                  ? "fill-amber-400 text-amber-400"
+                  : "text-gray-300"
             }
           />
         ))}
@@ -61,9 +61,9 @@ function StarRating({ rating, size = 16, showNumber = false }) {
 // ─── PRODUCT PAGE COMPONENT ──────────────────────────────────────────────────
 export default function ProductPage({ productSlug }) {
   const product = allProductsData.find((p) => p.name.toLowerCase()
-          .replace(/&/g, "and")
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/(^-|-$)/g, "") === productSlug);
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "") === productSlug);
 
   // If product not found, show 404
   if (!product) {
@@ -101,14 +101,14 @@ export default function ProductPage({ productSlug }) {
 
 
   const relatedProducts = allProductsData.filter(
-      (p) =>
-        p?.name !== selectedProduct?.name && 
-        p?.category
-          .toLowerCase()
-          .replace(/&/g, "and")
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/(^-|-$)/g, "") === category
-    );
+    (p) =>
+      p?.name !== selectedProduct?.name &&
+      p?.category
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "") === category
+  );
 
 
   const [selectedImage, setSelectedImage] = useState(0);
@@ -149,7 +149,10 @@ export default function ProductPage({ productSlug }) {
             </Link>
             <ChevronRight size={14} />
             <Link
-              href={`/${product.category.toLowerCase()}`}
+              href={`/${product.category.toLowerCase()
+                .replace(/&/g, "and")
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/(^-|-$)/g, "")}`}
               className="hover:text-emerald-600 transition-colors"
             >
               {product.category}
@@ -169,12 +172,12 @@ export default function ProductPage({ productSlug }) {
           <div>
             {/* Main Image */}
             <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden mb-4 relative group">
-              <Image  
-              src={product.images[selectedImage]}
+              <Image
+                src={product.images[selectedImage]}
                 alt={product.name}
                 height={300}
                 width={600}
-                className="w-full md:h-[500px] aspect-square object-cover"/>
+                className="w-full md:h-[500px] aspect-square object-cover" />
               {product.discount > 0 && (
                 <span className="absolute top-4 left-4 bg-red-500 text-white text-sm font-bold px-3 py-1.5 rounded-lg shadow-lg">
                   -{product.discount}% OFF
@@ -199,17 +202,16 @@ export default function ProductPage({ productSlug }) {
                 <button
                   key={idx}
                   onClick={() => setSelectedImage(idx)}
-                  className={`bg-white rounded-xl border-2 overflow-hidden transition-all ${
-                    selectedImage === idx
+                  className={`bg-white rounded-xl border-2 overflow-hidden transition-all ${selectedImage === idx
                       ? "border-emerald-600 shadow-md"
                       : "border-gray-100 hover:border-gray-300"
-                  }`}
+                    }`}
                 >
                   <Image src={img}
                     alt={`${product.name} ${idx + 1}`}
                     height={200}
                     width={200}
-                    className="w-full aspect-square object-cover"/>
+                    className="w-full aspect-square object-cover" />
                 </button>
               ))}
             </div>
@@ -259,14 +261,12 @@ export default function ProductPage({ productSlug }) {
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-2">
                   <div
-                    className={`w-3 h-3 rounded-full ${
-                      product.inStock ? "bg-emerald-500" : "bg-red-500"
-                    }`}
+                    className={`w-3 h-3 rounded-full ${product.inStock ? "bg-emerald-500" : "bg-red-500"
+                      }`}
                   />
                   <span
-                    className={`font-semibold ${
-                      product.inStock ? "text-emerald-600" : "text-red-600"
-                    }`}
+                    className={`font-semibold ${product.inStock ? "text-emerald-600" : "text-red-600"
+                      }`}
                   >
                     {product.inStock
                       ? `In Stock (${product.stockCount} available)`
@@ -393,11 +393,10 @@ export default function ProductPage({ productSlug }) {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`py-4 font-semibold text-sm relative transition-colors ${
-                    activeTab === tab.id
+                  className={`py-4 font-semibold text-sm relative transition-colors ${activeTab === tab.id
                       ? "text-emerald-600"
                       : "text-gray-500 hover:text-gray-700"
-                  }`}
+                    }`}
                 >
                   {tab.label}
                   {activeTab === tab.id && (
@@ -478,7 +477,7 @@ export default function ProductPage({ productSlug }) {
         </div>
 
         {/* Related Products */}
-        <RelatedProduct relatedProducts={relatedProducts}/>
+        <RelatedProduct relatedProducts={relatedProducts} />
       </div>
     </div>
   );
