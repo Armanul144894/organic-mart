@@ -13,7 +13,7 @@ export default function CategorySlider({ categories,categorySwiperRef }) {
       <SectionTitle
         title="Shop by Category"
         sub="Browse our fresh collections"
-        viewAll="#"
+        viewAll="category"
       />
 
       <div ref={categorySwiperRef} className="swiper">

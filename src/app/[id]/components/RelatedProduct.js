@@ -51,8 +51,8 @@ export default function RelatedProduct({ relatedProducts }) {
             380: { slidesPerView: 1.5 },
             540: { slidesPerView: 2 },
             640: { slidesPerView: 2 },
-            768: { slidesPerView: 3 },
-            1380: { slidesPerView: 4 },
+            768: { slidesPerView: 3.5 },
+            1380: { slidesPerView: 4.5 },
             // Desktop (1536px)
             1536: {
               slidesPerView: 5.5,
@@ -62,7 +62,7 @@ export default function RelatedProduct({ relatedProducts }) {
           className="w-full max-w-full"
         >
           {relatedProducts?.map((item) => (
-            <SwiperSlide key={item?.name} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+            <SwiperSlide key={item?.name} className="">
               <ProductCard product={item} />
             </SwiperSlide>
           ))}

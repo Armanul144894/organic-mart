@@ -3,141 +3,57 @@ import { notFound } from "next/navigation";
 import CategoryPage from "./components/CategoryPage";
 import SubcategoryPage from "./components/SubcategoryPage";
 import ProductPage from "./components/ProductPage";
-import products from "@/data/products"; // Import your products data
-import categories from "@/data/categories"; // Import your categories data
+import BrandPage from "./components/BrandPage";
+import products from "@/data/products";
+import { extractCategories, extractSubcategories, extractBrands } from "@/utils/extractData";
 
-// Category mapping (lowercase category names with URL-friendly slugs)
-const categoryMap = {
-  vegetables: "Vegetables",
-  fruits: "Fruits",
-  dairy: "Dairy",
-  grains: "Grains",
-  bakery: "Bakery",
-  "meat-and-fish": "Meat & Fish",
-  meat: "Meat & Fish", // Alternative slug
-  beverages: "Beverages",
-  snacks: "Snacks",
-  "cooking-and-spices": "Cooking & Spices",
-};
+// Get dynamic mappings from actual product data
+const categories = extractCategories();
+const subcategories = extractSubcategories();
+const brands = extractBrands();
 
-// Subcategory mapping - maps URL slug to actual subcategory name
-const subcategoryMap = {
-  // Vegetables
-  "leafy-greens": "Leafy Greens",
-  "root-vegetables": "Root Vegetables",
-  cruciferous: "Cruciferous",
-  nightshades: "Nightshades",
-  herbs: "Herbs",
-  "exotic-vegetables": "Exotic Vegetables",
-  
-  // Fruits
-  "tropical-fruits": "Tropical Fruits",
-  "citrus-fruits": "Citrus Fruits",
-  berries: "Berries",
-  "stone-fruits": "Stone Fruits",
-  melons: "Melons",
-  "exotic-fruits": "Exotic Fruits",
-  
-  // Dairy
-  "milk-and-cream": "Milk & Cream",
-  cheese: "Cheese",
-  yogurt: "Yogurt",
-  "butter-and-ghee": "Butter & Ghee",
-  eggs: "Eggs",
-  "plant-based-dairy": "Plant-Based Dairy",
-  
-  // Bakery
-  bread: "Bread",
-  "cakes-and-pastries": "Cakes & Pastries",
-  cookies: "Cookies",
-  "buns-and-rolls": "Buns & Rolls",
-  donuts: "Donuts",
-  "specialty-breads": "Specialty Breads",
-  
-  // Meat & Fish
-  chicken: "Chicken",
-  beef: "Beef",
-  mutton: "Mutton",
-  "fresh-fish": "Fresh Fish",
-  "frozen-fish": "Frozen Fish",
-  seafood: "Seafood",
-  
-  // Beverages
-  "tea-and-coffee": "Tea & Coffee",
-  juices: "Juices",
-  "soft-drinks": "Soft Drinks",
-  "energy-drinks": "Energy Drinks",
-  water: "Water",
-  "health-drinks": "Health Drinks",
-  
-  // Snacks
-  "chips-and-crisps": "Chips & Crisps",
-  "biscuits-and-cookies": "Biscuits & Cookies",
-  namkeen: "Namkeen",
-  chocolates: "Chocolates",
-  "nuts-and-seeds": "Nuts & Seeds",
-  "healthy-snacks": "Healthy Snacks",
-  
-  // Grains
-  rice: "Rice",
-  "wheat-flour": "Wheat & Flour",
-  "pulses-and-lentils": "Pulses & Lentils",
-  "oats-and-cereals": "Oats & Cereals",
-  "pasta-and-noodles": "Pasta & Noodles",
-  "specialty-grains": "Specialty Grains",
-  
-  // Cooking & Spices
-  "cooking-oil": "Cooking Oil",
-  spices: "Spices",
-  "salt-and-sugar": "Salt & Sugar",
-  "sauces-and-condiments": "Sauces & Condiments",
-  masalas: "Masalas",
-  "vinegar-and-pickles": "Vinegar & Pickles",
-};
-
-// Helper function to create URL-friendly slug
+// Helper function to create slug
 function createSlug(text) {
   return text
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
-// Check if slug exists in products
+// Get product by slug
 function getProductBySlug(slug) {
   return products.find((product) => product.slug === slug);
 }
 
-// Get category by slug
-function getCategoryBySlug(slug) {
-  const categoryName = categoryMap[slug];
-  if (!categoryName) return null;
-  
-  return categories.find((cat) => cat.name === categoryName);
+// Get category info by slug
+function getCategoryInfo(categorySlug) {
+  return categories[categorySlug] || null;
 }
 
-// Get subcategory info
+// Get subcategory info by slug
 function getSubcategoryInfo(subcategorySlug) {
-  const subcategoryName = subcategoryMap[subcategorySlug];
-  if (!subcategoryName) return null;
-  
-  // Find which category this subcategory belongs to
-  const category = categories.find((cat) =>
-    cat.subcategories.includes(subcategoryName)
-  );
-  
-  if (!category) return null;
-  
-  return {
-    name: subcategoryName,
-    category: category.name,
-    categorySlug: createSlug(category.name),
-  };
+  return subcategories[subcategorySlug] || null;
+}
+
+// Get brand info by slug
+function getBrandInfo(brandSlug) {
+  return brands[brandSlug] || null;
+}
+
+// Get products by category
+function getProductsByCategory(categoryName) {
+  return products.filter((p) => p.category === categoryName);
 }
 
 // Get products by subcategory
 function getProductsBySubcategory(subcategoryName) {
-  return products.filter((product) => product.subcategory === subcategoryName);
+  return products.filter((p) => p.subcategory === subcategoryName);
+}
+
+// Get products by brand
+function getProductsByBrand(brandName) {
+  return products.filter((p) => p.brand === brandName);
 }
 
 export default async function Page({ params }) {
@@ -145,18 +61,24 @@ export default async function Page({ params }) {
   
   console.log("PARAMS:", id);
 
-  // Guard: if id is missing
   if (!id || typeof id !== "string") {
     notFound();
   }
 
-  // Check if it's a product slug
+  // Priority 1: Check if it's a product slug
   const product = getProductBySlug(id);
   if (product) {
     return <ProductPage productSlug={id} />;
   }
 
-  // Check if it's a subcategory
+  // Priority 2: Check if it's a brand
+  const brandInfo = getBrandInfo(id);
+  if (brandInfo) {
+    const brandProducts = getProductsByBrand(brandInfo.name);
+    return <BrandPage brand={brandInfo} products={brandProducts} />;
+  }
+
+  // Priority 3: Check if it's a subcategory
   const subcategoryInfo = getSubcategoryInfo(id);
   if (subcategoryInfo) {
     const subcategoryProducts = getProductsBySubcategory(subcategoryInfo.name);
@@ -170,42 +92,40 @@ export default async function Page({ params }) {
     );
   }
 
-  // Check if it's a category
-  const categoryKey = id.toLowerCase();
-  if (categoryMap[categoryKey]) {
-    const category = getCategoryBySlug(categoryKey);
-    return <CategoryPage category={categoryMap[categoryKey]} categoryData={category} />;
+  // Priority 4: Check if it's a category
+  const categoryInfo = getCategoryInfo(id);
+  if (categoryInfo) {
+    return <CategoryPage category={categoryInfo.name} categoryData={categoryInfo} />;
   }
 
   // Not found
   notFound();
 }
 
-/* -------------------------------------------------- 
-   Static Params (SSG) 
--------------------------------------------------- */
-export async function generateStaticParams() {
+export function generateStaticParams() {
   // Generate params for all categories
-  const categoryParams = Object.keys(categoryMap).map((category) => ({
-    id: category,
+  const categoryParams = Object.keys(categories).map((slug) => ({
+    id: slug,
   }));
 
   // Generate params for all subcategories
-  const subcategoryParams = Object.keys(subcategoryMap).map((subcategory) => ({
-    id: subcategory,
+  const subcategoryParams = Object.keys(subcategories).map((slug) => ({
+    id: slug,
   }));
 
-  // Generate params for all products using their slugs
+  // Generate params for all brands
+  const brandParams = Object.keys(brands).map((slug) => ({
+    id: slug,
+  }));
+
+  // Generate params for all products
   const productParams = products.map((product) => ({
     id: product.slug,
   }));
 
-  return [...categoryParams, ...subcategoryParams, ...productParams];
+  return [...categoryParams, ...subcategoryParams, ...brandParams, ...productParams];
 }
 
-/* -------------------------------------------------- 
-   Metadata 
--------------------------------------------------- */
 export async function generateMetadata({ params }) {
   const { id } = await params;
 
@@ -229,24 +149,30 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  // Check if it's a brand
+  const brandInfo = getBrandInfo(id);
+  if (brandInfo) {
+    return {
+      title: `${brandInfo.name} Products - OrganicMart`,
+      description: `Shop ${brandInfo.productCount} products from ${brandInfo.name}. Premium quality products at best prices.`,
+    };
+  }
+
   // Check if it's a subcategory
   const subcategoryInfo = getSubcategoryInfo(id);
   if (subcategoryInfo) {
-    const productCount = getProductsBySubcategory(subcategoryInfo.name).length;
     return {
       title: `${subcategoryInfo.name} - ${subcategoryInfo.category} - OrganicMart`,
-      description: `Browse ${productCount} fresh ${subcategoryInfo.name.toLowerCase()} products in our ${subcategoryInfo.category} category`,
+      description: `Browse ${subcategoryInfo.productCount} fresh ${subcategoryInfo.name.toLowerCase()} products in our ${subcategoryInfo.category} category`,
     };
   }
 
   // Check if it's a category
-  const categoryKey = id.toLowerCase();
-  if (categoryMap[categoryKey]) {
-    const categoryName = categoryMap[categoryKey];
-    const categoryProducts = products.filter((p) => p.category === categoryName);
+  const categoryInfo = getCategoryInfo(id);
+  if (categoryInfo) {
     return {
-      title: `${categoryName} - OrganicMart`,
-      description: `Browse our fresh ${categoryName} - ${categoryProducts.length} products available`,
+      title: `${categoryInfo.name} - OrganicMart`,
+      description: `Browse our fresh ${categoryInfo.name} - ${categoryInfo.productCount} products available`,
     };
   }
 

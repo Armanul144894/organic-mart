@@ -26,6 +26,7 @@ import categories from "@/data/categories";
 import DairyProducts from "./components/DairyProducts";
 import Link from "next/link";
 import MeatAndFish from "./components/MeatAndFish";
+import { extractBrands } from "@/utils/extractData";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const bannerSlides = [
@@ -56,16 +57,8 @@ const allCategories = categories;
 
 const allProducts = products;
 
-const brands = [
-  { id: 1, name: "PRAN", bg: "#10b981" },
-  { id: 2, name: "Nestle", bg: "#ef4444" },
-  { id: 3, name: "ACI", bg: "#3b82f6" },
-  { id: 4, name: "Arla", bg: "#f59e0b" },
-  { id: 5, name: "Fresh", bg: "#8b5cf6" },
-  { id: 6, name: "Coca", bg: "#dc2626" },
-  { id: 7, name: "PRAN", bg: "#10b981" },
-  { id: 8, name: "Nestle", bg: "#ef4444" },
-];
+const brands = extractBrands();
+const brandsArray = Object.values(brands).sort((a, b) => b.productCount - a.productCount);
 
 // ─── STAR RENDERER ───────────────────────────────────────────────────────────
 
@@ -324,7 +317,7 @@ export default function EcommerceHomepage() {
 
       {/* ═══════════ BRANDS SWIPER ═══════════ */}
       <PopularBrand
-        brands={brands}
+        brands={brandsArray}
         brandSwiperRef={brandSwiperRef}
         SectionTitle={SectionTitle}
       />
