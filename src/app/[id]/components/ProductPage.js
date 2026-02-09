@@ -112,8 +112,9 @@ export default function ProductPage({ productSlug }) {
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "") === category
   );
+  
   const incrementQuantity = () => {
-    if (quantity < product.stockCount) setQuantity(quantity + 1);
+    if (quantity < product.inStock) setQuantity(quantity + 1);
   };
 
   const decrementQuantity = () => {
@@ -275,7 +276,7 @@ export default function ProductPage({ productSlug }) {
                       }`}
                   >
                     {product.inStock
-                      ? `In Stock (${product.stockCount} available)`
+                      ? `In Stock (${product.inStock} available)`
                       : "Out of Stock"}
                   </span>
                 </div>
@@ -304,14 +305,14 @@ export default function ProductPage({ productSlug }) {
                       onChange={(e) => {
                         const val = parseInt(e.target.value) || 1;
                         setQuantity(
-                          Math.min(Math.max(1, val), product.stockCount)
+                          Math.min(Math.max(1, val), product.inStock)
                         );
                       }}
                       className="w-16 text-center font-bold text-lg outline-none"
                     />
                     <button
                       onClick={incrementQuantity}
-                      disabled={quantity >= product.stockCount}
+                      disabled={quantity >= product.inStock}
                       className="px-4 py-3 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       <Plus size={18} />

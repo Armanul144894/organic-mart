@@ -8,6 +8,7 @@ import {
   Twitter,
   Youtube,
 } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 export default function Footer() {
@@ -27,13 +28,13 @@ export default function Footer() {
               </p>
               <div className="flex gap-2.5 mt-4">
                 {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
-                  <a
+                  <Link
                     key={i}
                     href="#"
                     className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-emerald-600 hover:text-white transition-colors"
                   >
                     <Icon size={15} />
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -44,19 +45,19 @@ export default function Footer() {
               </h4>
               <ul className="space-y-2 text-xs">
                 {[
-                  "About Us",
-                  "Contact Us",
-                  "Track Order",
+                  "About",
+                  "Contact",
+                  "Brands",
                   "Privacy Policy",
                   "Terms & Conditions",
                 ].map((l, i) => (
                   <li key={i}>
-                    <a
-                      href="#"
+                    <Link
+                      href={`${l.toLocaleLowerCase()}`}
                       className="hover:text-emerald-400 transition-colors"
                     >
                       {l}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -76,12 +77,12 @@ export default function Footer() {
                   "Snacks",
                 ].map((l, i) => (
                   <li key={i}>
-                    <a
+                    <Link
                       href="#"
                       className="hover:text-emerald-400 transition-colors"
                     >
                       {l}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

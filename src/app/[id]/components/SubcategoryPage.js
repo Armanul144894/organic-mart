@@ -15,213 +15,9 @@ import {
   ArrowUpDown,
   X,
 } from "lucide-react";
-
-// Star Rating Component
-function StarRating({ rating, size = 13 }) {
-  const full = Math.floor(rating);
-  const half = rating - full >= 0.5;
-  return (
-    <div className="flex items-center gap-0.5">
-      {[...Array(5)].map((_, i) => (
-        <Star
-          key={i}
-          size={size}
-          className={
-            i < full
-              ? "fill-amber-400 text-amber-400"
-              : i === full && half
-                ? "fill-amber-400 text-amber-400"
-                : "text-gray-300"
-          }
-          style={
-            i === full && half
-              ? { clipPath: "inset(0 50% 0 0)", fill: "#fbbf24" }
-              : {}
-          }
-        />
-      ))}
-    </div>
-  );
-}
-
-// Product Card Grid View
-function ProductCardGrid({ product, onAddToCart, onToggleWishlist, isWishlisted }) {
-  return (
-    <div className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
-      <Link href={`/${product.slug}`}>
-        <div className="relative overflow-hidden bg-gray-50" style={{ height: 220 }}>
-          <Image
-            src={product.images[0]}
-            alt={product.name}
-            height={200}
-            width={400}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-          />
-          <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-            {product.discount > 0 && (
-              <span className="bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg shadow">
-                -{product.discount}%
-              </span>
-            )}
-            {!product.inStock && (
-              <span className="bg-gray-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg shadow">
-                Out of Stock
-              </span>
-            )}
-          </div>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onToggleWishlist(product.id);
-            }}
-            className="absolute top-3 right-3 bg-white/90 backdrop-blur p-1.5 rounded-full shadow hover:scale-110 transition-transform"
-          >
-            <Heart
-              size={16}
-              className={isWishlisted ? "fill-red-500 text-red-500" : "text-gray-500"}
-            />
-          </button>
-        </div>
-      </Link>
-
-      <div className="p-3.5 flex flex-col flex-1">
-        <Link href={`/${product.slug}`}>
-          <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide truncate">
-            {product.brand}
-          </p>
-          <h3 className="text-sm font-bold text-gray-800 mt-0.5 line-clamp-2 leading-snug">
-            {product.name}
-          </h3>
-          <p className="text-xs text-gray-400 mt-0.5">{product.weight}</p>
-
-          <div className="flex items-center gap-1.5 mt-2">
-            <StarRating rating={product.rating} />
-            <span className="text-xs text-gray-400">({product.reviews})</span>
-          </div>
-        </Link>
-
-        <div className="flex items-center justify-between mt-auto pt-3">
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-lg font-extrabold text-emerald-600">
-              ৳{product.price}
-            </span>
-            {product.oldPrice && (
-              <span className="text-xs text-gray-400 line-through">
-                ৳{product.oldPrice}
-              </span>
-            )}
-          </div>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onAddToCart(product);
-            }}
-            disabled={!product.inStock}
-            className={`w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all ${product.inStock
-                ? "bg-emerald-600 hover:bg-emerald-700 text-white hover:shadow-lg active:scale-90"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-              }`}
-          >
-            <Plus size={18} />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Product Card List View
-function ProductCardList({ product, onAddToCart, onToggleWishlist, isWishlisted }) {
-  return (
-    <div className="group bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col sm:flex-row h-full">
-      <Link href={`/${product.slug}`}>
-        <div className="relative overflow-hidden bg-gray-50 sm:w-64 flex-shrink-0" style={{ height: 200 }}>
-          <Image
-            src={product.images[0]}
-            alt={product.name}
-            height={200}
-            width={400}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-          />
-          <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-            {product.discount > 0 && (
-              <span className="bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg shadow">
-                -{product.discount}%
-              </span>
-            )}
-          </div>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onToggleWishlist(product.id);
-            }}
-            className="absolute top-3 right-3 bg-white/90 backdrop-blur p-1.5 rounded-full shadow hover:scale-110 transition-transform"
-          >
-            <Heart
-              size={16}
-              className={isWishlisted ? "fill-red-500 text-red-500" : "text-gray-500"}
-            />
-          </button>
-        </div>
-      </Link>
-
-      <div className="p-5 flex flex-col flex-1">
-        <Link href={`/${product.slug}`}>
-          <div className="flex items-start justify-between mb-2">
-            <div className="flex-1">
-              <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide">
-                {product.brand}
-              </p>
-              <h3 className="text-base font-bold text-gray-800 mt-1 leading-snug">
-                {product.name}
-              </h3>
-              <p className="text-xs text-gray-400 mt-1">{product.weight}</p>
-            </div>
-            {!product.inStock && (
-              <span className="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">
-                Out of Stock
-              </span>
-            )}
-          </div>
-
-          <div className="flex items-center gap-2 mt-2">
-            <StarRating rating={product.rating} size={14} />
-            <span className="text-sm text-gray-500">
-              {product.rating} ({product.reviews} reviews)
-            </span>
-          </div>
-        </Link>
-
-        <div className="flex items-center justify-between mt-auto pt-4">
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-extrabold text-emerald-600">
-              ৳{product.price}
-            </span>
-            {product.oldPrice && (
-              <span className="text-sm text-gray-400 line-through">
-                ৳{product.oldPrice}
-              </span>
-            )}
-          </div>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onAddToCart(product);
-            }}
-            disabled={!product.inStock}
-            className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-sm transition-all ${product.inStock
-                ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-md hover:shadow-lg active:scale-95"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-              }`}
-          >
-            <Plus size={18} />
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
+import ProductGridCard from "./ProductGridCard";
+import ProductListCard from "./ProductListCard";
+import StarRating from "@/app/components/StarRating";
 
 export default function SubcategoryPage({
   subcategory,
@@ -252,7 +48,7 @@ export default function SubcategoryPage({
 
   const toggleBrand = (brand) => {
     setSelectedBrands((prev) =>
-      prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
+      prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand],
     );
   };
 
@@ -266,7 +62,7 @@ export default function SubcategoryPage({
 
   const toggleWishlist = (id) => {
     setWishlist((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
     );
   };
 
@@ -276,11 +72,13 @@ export default function SubcategoryPage({
 
   // Apply filters
   let filteredProducts = products.filter((p) => {
-    if (selectedBrands.length && !selectedBrands.includes(p.brand)) return false;
+    if (selectedBrands.length && !selectedBrands.includes(p.brand))
+      return false;
 
     const selectedRange = priceRanges.find((r) => r.value === priceRange);
     if (selectedRange && selectedRange.min !== undefined) {
-      if (p.price < selectedRange.min || p.price > selectedRange.max) return false;
+      if (p.price < selectedRange.min || p.price > selectedRange.max)
+        return false;
     }
 
     if (minRating > 0 && p.rating < minRating) return false;
@@ -318,10 +116,14 @@ export default function SubcategoryPage({
               Home
             </Link>
             <span>/</span>
-            <Link href={`/${category.toLowerCase()
-              .replace(/&/g, "and")
-              .replace(/[^a-z0-9]+/g, "-")
-              .replace(/(^-|-$)/g, "")}`} className="hover:text-emerald-600 transition-colors">
+            <Link
+              href={`/${category
+                .toLowerCase()
+                .replace(/&/g, "and")
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/(^-|-$)/g, "")}`}
+              className="hover:text-emerald-600 transition-colors"
+            >
               {category}
             </Link>
             <span>/</span>
@@ -337,7 +139,8 @@ export default function SubcategoryPage({
             {subcategory}
           </h1>
           <p className="text-gray-600">
-            {filteredProducts.length} {filteredProducts.length === 1 ? "product" : "products"} available
+            {filteredProducts.length}{" "}
+            {filteredProducts.length === 1 ? "product" : "products"} available
           </p>
         </div>
       </div>
@@ -346,8 +149,9 @@ export default function SubcategoryPage({
         <div className="flex gap-6">
           {/* Sidebar Filters */}
           <aside
-            className={`${showFilters ? "block" : "hidden"
-              } lg:block fixed lg:sticky top-0 left-0 h-screen lg:h-auto w-80 lg:w-64 bg-white lg:bg-transparent z-40 lg:z-0 shadow-2xl lg:shadow-none`}
+            className={`${
+              showFilters ? "block" : "hidden"
+            } lg:block fixed lg:sticky top-0 left-0 h-screen lg:h-auto w-80 lg:w-64 bg-white lg:bg-transparent z-40 lg:z-0 shadow-2xl lg:shadow-none`}
           >
             <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden lg:sticky lg:top-40 h-full lg:h-auto flex flex-col lg:max-h-[calc(100vh-10rem)]">
               <div className="flex items-center justify-between p-4 border-b border-gray-100 lg:hidden flex-shrink-0">
@@ -373,7 +177,9 @@ export default function SubcategoryPage({
 
                 {/* Price Range */}
                 <div className="mb-6">
-                  <h3 className="font-bold text-sm text-gray-800 mb-3">Price Range</h3>
+                  <h3 className="font-bold text-sm text-gray-800 mb-3">
+                    Price Range
+                  </h3>
                   <div className="space-y-2">
                     {priceRanges.map((range) => (
                       <label
@@ -398,7 +204,9 @@ export default function SubcategoryPage({
 
                 {/* Brands */}
                 <div className="mb-6">
-                  <h3 className="font-bold text-sm text-gray-800 mb-3">Brands</h3>
+                  <h3 className="font-bold text-sm text-gray-800 mb-3">
+                    Brands
+                  </h3>
                   <div className="space-y-2">
                     {brands.map((brand) => (
                       <label
@@ -421,7 +229,9 @@ export default function SubcategoryPage({
 
                 {/* Rating */}
                 <div className="mb-6">
-                  <h3 className="font-bold text-sm text-gray-800 mb-3">Minimum Rating</h3>
+                  <h3 className="font-bold text-sm text-gray-800 mb-3">
+                    Minimum Rating
+                  </h3>
                   <div className="space-y-2">
                     {[4, 3, 2, 1].map((rating) => (
                       <label
@@ -448,7 +258,9 @@ export default function SubcategoryPage({
 
                 {/* Quick Filters */}
                 <div className="mb-6">
-                  <h3 className="font-bold text-sm text-gray-800 mb-3">Quick Filters</h3>
+                  <h3 className="font-bold text-sm text-gray-800 mb-3">
+                    Quick Filters
+                  </h3>
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 cursor-pointer group">
                       <input
@@ -532,19 +344,21 @@ export default function SubcategoryPage({
                 <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
                   <button
                     onClick={() => setViewMode("grid")}
-                    className={`p-2 rounded-md transition-colors ${viewMode === "grid"
+                    className={`p-2 rounded-md transition-colors ${
+                      viewMode === "grid"
                         ? "bg-white text-emerald-600 shadow-sm"
                         : "text-gray-500 hover:text-gray-700"
-                      }`}
+                    }`}
                   >
                     <Grid3x3 size={18} />
                   </button>
                   <button
                     onClick={() => setViewMode("list")}
-                    className={`p-2 rounded-md transition-colors ${viewMode === "list"
+                    className={`p-2 rounded-md transition-colors ${
+                      viewMode === "list"
                         ? "bg-white text-emerald-600 shadow-sm"
                         : "text-gray-500 hover:text-gray-700"
-                      }`}
+                    }`}
                   >
                     <List size={18} />
                   </button>
@@ -579,22 +393,10 @@ export default function SubcategoryPage({
               >
                 {filteredProducts.map((product) =>
                   viewMode === "grid" ? (
-                    <ProductCardGrid
-                      key={product.id}
-                      product={product}
-                      onAddToCart={addToCart}
-                      onToggleWishlist={toggleWishlist}
-                      isWishlisted={wishlist.includes(product.id)}
-                    />
+                    <ProductGridCard key={product.id} product={product} />
                   ) : (
-                    <ProductCardList
-                      key={product.id}
-                      product={product}
-                      onAddToCart={addToCart}
-                      onToggleWishlist={toggleWishlist}
-                      isWishlisted={wishlist.includes(product.id)}
-                    />
-                  )
+                    <ProductListCard key={product.id} product={product} />
+                  ),
                 )}
               </div>
             )}

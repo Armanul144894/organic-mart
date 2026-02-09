@@ -1,11 +1,11 @@
-import createSlug from "@/app/[id]/components/createSlug";
-import StarRating from "@/app/components/StarRating";
-import { Heart, Plus } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState } from "react";
+import StarRating from '@/app/components/StarRating';
+import { Heart, Plus } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useState } from 'react'
+import createSlug from './createSlug';
 
-export default function ProductCardGrid({ product }) {
+export default function ProductGridCard({ product }) {
   const [wishlisted, setWishlisted] = useState(false);
   const productSlug = product.slug || createSlug(product.name);
 
@@ -16,13 +16,14 @@ export default function ProductCardGrid({ product }) {
         className="relative overflow-hidden bg-gray-50 block"
         style={{ height: 220 }}
       >
+
         <Image
-          src={product.images[0]}
+         src={product.images[0]}
           alt={product.name}
           height={200}
           width={400}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-        />
+          />
         <div className="absolute top-3 left-3 flex flex-col gap-1.5">
           {product.discount > 0 && (
             <span className="bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg shadow">

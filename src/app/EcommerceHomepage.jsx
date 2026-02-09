@@ -27,6 +27,8 @@ import DairyProducts from "./components/DairyProducts";
 import Link from "next/link";
 import MeatAndFish from "./components/MeatAndFish";
 import { extractBrands } from "@/utils/extractData";
+import BannerSection from "./components/BannerSection";
+import CookingSpices from "./components/CookingSpices";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const bannerSlides = [
@@ -58,7 +60,9 @@ const allCategories = categories;
 const allProducts = products;
 
 const brands = extractBrands();
-const brandsArray = Object.values(brands).sort((a, b) => b.productCount - a.productCount);
+const brandsArray = Object.values(brands).sort(
+  (a, b) => b.productCount - a.productCount,
+);
 
 // ─── STAR RENDERER ───────────────────────────────────────────────────────────
 
@@ -99,7 +103,7 @@ export default function EcommerceHomepage() {
   const dairySwiperRef = useRef(null);
   const meatFishSwiperRef = useRef(null);
   const brandSwiperRef = useRef(null);
-
+  const cookingSwiperRef = useRef(null);
 
   // ── Swiper init helper ──
   const initSwiper = useCallback((container, options = {}) => {
@@ -220,14 +224,35 @@ export default function EcommerceHomepage() {
         },
       });
     }
-    // Dairy products
+
+    // Meat Fish products
     if (meatFishSwiperRef.current && !meatFishSwiperRef.current.swiper) {
       initSwiper(meatFishSwiperRef.current, {
         spaceBetween: 16,
         slidesPerView: "auto",
         navigation: {
-          nextEl: meatFishSwiperRef.current.querySelector(".swiper-button-next"),
-          prevEl: meatFishSwiperRef.current.querySelector(".swiper-button-prev"),
+          nextEl: meatFishSwiperRef.current.querySelector(
+            ".swiper-button-next",
+          ),
+          prevEl: meatFishSwiperRef.current.querySelector(
+            ".swiper-button-prev",
+          ),
+        },
+      });
+    }
+
+    // Cooking products
+    if (cookingSwiperRef.current && !cookingSwiperRef.current.swiper) {
+      initSwiper(cookingSwiperRef.current, {
+        spaceBetween: 16,
+        slidesPerView: "auto",
+        navigation: {
+          nextEl: cookingSwiperRef.current.querySelector(
+            ".swiper-button-next",
+          ),
+          prevEl: cookingSwiperRef.current.querySelector(
+            ".swiper-button-prev",
+          ),
         },
       });
     }
@@ -238,7 +263,8 @@ export default function EcommerceHomepage() {
         spaceBetween: 20,
         slidesPerView: "auto",
         loop: true,
-        autoplay: { delay: 3000, pauseOnMouseEnter: true },
+        autoplay: { delay: 500, pauseOnMouseEnter: true },
+        speed: 1500,
       });
     }
   }
@@ -247,7 +273,12 @@ export default function EcommerceHomepage() {
   const vegProducts = allProducts.filter((p) => p.category === "Vegetables");
   const fruitProducts = allProducts.filter((p) => p.category === "Fruits");
   const dairyProducts = allProducts.filter((p) => p.category === "Dairy");
-  const meatFishProducts = allProducts.filter((p) => p.category === "Meat & Fish");
+  const meatFishProducts = allProducts.filter(
+    (p) => p.category === "Meat & Fish",
+  );
+  const cookingProducts = allProducts.filter(
+    (p) => p.category === "Cooking & Spices",
+  );
   const hotDeals = [...allProducts]
     .sort((a, b) => b.discount - a.discount)
     .slice(0, 8);
@@ -270,7 +301,6 @@ export default function EcommerceHomepage() {
     >
       {/* ═══════════ HEADER ═══════════ */}
 
-
       {/* ═══════════ HERO BANNER SWIPER ═══════════ */}
       <HomeBanner bannerSlides={bannerSlides} heroSwiperRef={heroSwiperRef} />
 
@@ -278,49 +308,58 @@ export default function EcommerceHomepage() {
       <CategorySlider
         categories={allCategories}
         categorySwiperRef={categorySwiperRef}
-        SectionTitle={SectionTitle}
+      
       />
 
       {/* ═══════════ HOT DEALS GRID ═══════════ */}
-      <HotDeals hotDeals={hotDeals} SectionTitle={SectionTitle} />
+      <HotDeals hotDeals={hotDeals} />
 
       {/* ═══════════ VEGETABLES SWIPER ═══════════ */}
       <FreshVegetable
         vegProducts={vegProducts}
         vegSwiperRef={vegSwiperRef}
-        SectionTitle={SectionTitle}
+      
       />
 
       {/* ═══════════ WEEKLY OFFERS ═══════════ */}
-      <WeeklyOffer SectionTitle={SectionTitle} />
+      <WeeklyOffer />
 
       {/* ═══════════ FRUITS SWIPER ═══════════ */}
       <FreshFruits
         fruitProducts={fruitProducts}
         fruitSwiperRef={fruitSwiperRef}
-        SectionTitle={SectionTitle}
+      
       />
 
       {/* ═══════════ FRUITS SWIPER ═══════════ */}
       <DairyProducts
         dairyProducts={dairyProducts}
         dairySwiperRef={dairySwiperRef}
-        SectionTitle={SectionTitle}
+      
       />
 
       {/* ═══════════ FRUITS SWIPER ═══════════ */}
       <MeatAndFish
         meatFishProducts={meatFishProducts}
         meatFishSwiperRef={meatFishSwiperRef}
-        SectionTitle={SectionTitle}
+      
+      />
+
+      <BannerSection />
+
+      {/* ═══════════ BRANDS SWIPER ═══════════ */}
+      <CookingSpices
+        cookingProducts={cookingProducts}
+        cookingSwiperRef={cookingSwiperRef}
       />
 
       {/* ═══════════ BRANDS SWIPER ═══════════ */}
       <PopularBrand
         brands={brandsArray}
         brandSwiperRef={brandSwiperRef}
-        SectionTitle={SectionTitle}
+      
       />
+
 
       {/* ═══════════ FEATURES ═══════════ */}
       <HomeFeatures />

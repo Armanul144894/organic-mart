@@ -1,11 +1,11 @@
-import createSlug from "@/app/[id]/components/createSlug";
 import StarRating from "@/app/components/StarRating";
-import { Heart, ShoppingCart } from "lucide-react";
+import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import createSlug from "./createSlug";
 
-export default function ProductCardList({ product }) {
+export default function ProductListCard({ product }) {
   const [wishlisted, setWishlisted] = useState(false);
   const productSlug = product.slug || createSlug(product.name);
 

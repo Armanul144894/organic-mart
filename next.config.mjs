@@ -8,11 +8,6 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'cdn.daraz.com.bd',
-      },
-      
-      {
-        protocol: 'https',
         hostname: 'cdn.chaldal.com',
       },
       {

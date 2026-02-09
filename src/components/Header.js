@@ -159,7 +159,7 @@ export default function Header({ cartCount = 3 }) {
 
                 {/* Mega Menu Dropdown */}
                 {showCategoryMenu && (
-                  <div className="absolute left-0 top-full w-[700px] lg:w-[980px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 grid grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-4 z-50">
+                  <div className="absolute left-0 top-full w-[700px] lg:w-[980px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 grid grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4 z-50">
                     {categoryData.map((cat) => (
                       <div key={cat.id} className="group">
                         <Link
@@ -211,7 +211,7 @@ export default function Header({ cartCount = 3 }) {
 
         {/* ═══════════ MOBILE SEARCH (visible when menu closed) ═══════════ */}
         {!menuOpen && (
-          <div className="lg:hidden border-t border-gray-100 px-4 py-2">
+          <div className="lg:hidden container mx-auto border-t border-gray-100 px-4 py-2">
             <div className="flex">
               <input
                 type="text"
