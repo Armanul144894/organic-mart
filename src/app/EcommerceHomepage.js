@@ -102,8 +102,9 @@ export default function EcommerceHomepage() {
     // Hero
     if (heroSwiperRef.current && !heroSwiperRef.current.swiper) {
       initSwiper(heroSwiperRef.current, {
-        autoplay: { delay: 4500, disableOnInteraction: false },
+        autoplay: { delay: 5000, disableOnInteraction: false },
         loop: true,
+        speed:3500,
         pagination: {
           el: heroSwiperRef.current.querySelector(".swiper-pagination"),
           clickable: true,
@@ -125,6 +126,7 @@ export default function EcommerceHomepage() {
       initSwiper(categorySwiperRef.current, {
         spaceBetween: 16,
         slidesPerView: 2,
+        speed:2000,
         navigation: {
           nextEl: categorySwiperRef.current.querySelector(
             ".swiper-button-next",
@@ -154,6 +156,7 @@ export default function EcommerceHomepage() {
       initSwiper(vegSwiperRef.current, {
         spaceBetween: 16,
         slidesPerView: "auto",
+        speed:2000,
         navigation: {
           nextEl: vegSwiperRef.current.querySelector(".swiper-button-next"),
           prevEl: vegSwiperRef.current.querySelector(".swiper-button-prev"),
@@ -165,6 +168,7 @@ export default function EcommerceHomepage() {
       initSwiper(fruitSwiperRef.current, {
         spaceBetween: 16,
         slidesPerView: "auto",
+        speed:2000,
         navigation: {
           nextEl: fruitSwiperRef.current.querySelector(".swiper-button-next"),
           prevEl: fruitSwiperRef.current.querySelector(".swiper-button-prev"),
@@ -177,6 +181,7 @@ export default function EcommerceHomepage() {
       initSwiper(dairySwiperRef.current, {
         spaceBetween: 16,
         slidesPerView: "auto",
+        speed:2000,
         navigation: {
           nextEl: dairySwiperRef.current.querySelector(".swiper-button-next"),
           prevEl: dairySwiperRef.current.querySelector(".swiper-button-prev"),
@@ -189,6 +194,7 @@ export default function EcommerceHomepage() {
       initSwiper(meatFishSwiperRef.current, {
         spaceBetween: 16,
         slidesPerView: "auto",
+        speed:2000,
         navigation: {
           nextEl: meatFishSwiperRef.current.querySelector(
             ".swiper-button-next",
@@ -205,6 +211,7 @@ export default function EcommerceHomepage() {
       initSwiper(cookingSwiperRef.current, {
         spaceBetween: 16,
         slidesPerView: "auto",
+        speed:2000,
         navigation: {
           nextEl: cookingSwiperRef.current.querySelector(
             ".swiper-button-next",
@@ -276,7 +283,7 @@ export default function EcommerceHomepage() {
   );
   const hotDeals = [...allProducts]
     .sort((a, b) => b.discount - a.discount)
-    .slice(0, 8);
+    .slice(0, 10);
 
   // ── NAV LINKS ──
   const navLinks = [
