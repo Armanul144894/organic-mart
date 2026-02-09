@@ -1,15 +1,8 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
-  Phone,
-  Mail,
-  Search,
-  User,
-  Heart,
-  ShoppingCart,
   ArrowRight,
   Menu,
-  X,
   Mail as MailIcon,
 } from "lucide-react";
 import CategorySlider from "./components/CategorySlider";
@@ -105,41 +98,7 @@ export default function EcommerceHomepage() {
   const brandSwiperRef = useRef(null);
   const cookingSwiperRef = useRef(null);
 
-  // ── Swiper init helper ──
-  const initSwiper = useCallback((container, options = {}) => {
-    if (!container || !window.Swiper) return null;
-    // destroy any previous instance
-    if (container.swiper) container.swiper.destroy(true, true);
-    return new window.Swiper(container, {
-      ...options,
-    });
-  }, []);
-
-  // ── load Swiper CSS + JS via CDN, then init all swipers ──
-  useEffect(() => {
-    // inject CSS
-    if (!document.getElementById("swiper-css")) {
-      const link = document.createElement("link");
-      link.id = "swiper-css";
-      link.rel = "stylesheet";
-      link.href =
-        "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
-      document.head.appendChild(link);
-    }
-    // inject JS
-    if (!document.getElementById("swiper-js")) {
-      const script = document.createElement("script");
-      script.id = "swiper-js";
-      script.src =
-        "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
-      script.onload = () => initAllSwipers();
-      document.head.appendChild(script);
-    } else if (window.Swiper) {
-      initAllSwipers();
-    }
-  });
-
-  function initAllSwipers() {
+   function initAllSwipers() {
     // Hero
     if (heroSwiperRef.current && !heroSwiperRef.current.swiper) {
       initSwiper(heroSwiperRef.current, {
@@ -268,6 +227,42 @@ export default function EcommerceHomepage() {
       });
     }
   }
+  
+  // ── Swiper init helper ──
+  const initSwiper = useCallback((container, options = {}) => {
+    if (!container || !window.Swiper) return null;
+    // destroy any previous instance
+    if (container.swiper) container.swiper.destroy(true, true);
+    return new window.Swiper(container, {
+      ...options,
+    });
+  }, []);
+
+  // ── load Swiper CSS + JS via CDN, then init all swipers ──
+  useEffect(() => {
+    // inject CSS
+    if (!document.getElementById("swiper-css")) {
+      const link = document.createElement("link");
+      link.id = "swiper-css";
+      link.rel = "stylesheet";
+      link.href =
+        "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
+      document.head.appendChild(link);
+    }
+    // inject JS
+    if (!document.getElementById("swiper-js")) {
+      const script = document.createElement("script");
+      script.id = "swiper-js";
+      script.src =
+        "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
+      script.onload = () => initAllSwipers();
+      document.head.appendChild(script);
+    } else if (window.Swiper) {
+      initAllSwipers();
+    }
+  });
+
+ 
 
   // filtered lists
   const vegProducts = allProducts.filter((p) => p.category === "Vegetables");

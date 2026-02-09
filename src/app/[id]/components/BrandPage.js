@@ -20,16 +20,19 @@ import ProductListCard from "./ProductListCard";
 
 // Helper to create slug from name
 
-
-
 // ─── BRAND PAGE COMPONENT ─────────────────────────────────────────────────────
 export default function BrandPage({ brand, products: brandProducts }) {
+  // Calculate price range from products
+  const minPrice = Math.min(...brandProducts.map((p) => p.price));
+  const maxPrice = Math.max(...brandProducts.map((p) => p.price));
+
   const [viewMode, setViewMode] = useState("grid");
   const [sortBy, setSortBy] = useState("featured");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [showOnSale, setShowOnSale] = useState(false);
   const [showInStock, setShowInStock] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+  const [priceRange, setPriceRange] = useState([minPrice, maxPrice]);
 
   // Get unique categories for this brand
   const categories = [...new Set(brandProducts.map((p) => p.category))];
@@ -40,13 +43,6 @@ export default function BrandPage({ brand, products: brandProducts }) {
     brandProducts.reduce((acc, p) => acc + p.rating, 0) / totalProducts
   ).toFixed(1);
   const onSaleCount = brandProducts.filter((p) => p.discount > 0).length;
-
-  // Calculate price range from products
-  const minPrice = Math.min(...brandProducts.map((p) => p.price));
-  const maxPrice = Math.max(...brandProducts.map((p) => p.price));
-
-  // Initialize price range state
-  const [priceRange, setPriceRange] = useState([minPrice, maxPrice]);
 
   // Update price range when products change
   useEffect(() => {
