@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Phone,
   Mail,
@@ -11,10 +11,133 @@ import {
   X,
   ChevronDown,
   ChevronRight,
+  LogOut,
+  Sparkles,
+  Package,
+  MapPin,
+  Settings,
 } from "lucide-react";
 import Link from "next/link";
 import CartOffcanvas from "./CartOffcanvas";
 import categories from "@/data/categories";
+import SignInModal from "./SignInModal";
+import Image from "next/image";
+
+function UserDropdown({ user, onSignOut }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  // Close on outside click
+  useEffect(() => {
+    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const menuItems = [
+    { href: "#",            icon: User,    label: "My Account" },
+    { href: "#", icon: Package, label: "My Orders" },
+    { href: "#",icon: Heart,   label: "Wishlist" },
+    { href: "#",icon: MapPin, label: "Addresses" },
+    { href: "#",icon: Settings,label: "Settings" },
+  ];
+
+  return (
+    <div className="relative" ref={ref}>
+      {/* Trigger */}
+      <button
+        onClick={() => setOpen(!open)}
+        className="relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-all text-gray-600 hover:bg-gray-100 hover:text-emerald-600"
+      >
+        {/* Avatar or icon */}
+        <div className="relative">
+          {user.avatar ? (
+            <Image
+              src={user.avatar}
+              height={40}
+              width={40}
+              alt={user.name}
+              className="w-6 h-6 rounded-full object-cover ring-2 ring-emerald-400 ring-offset-1"
+            />
+          ) : (
+            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
+              <span className="text-white text-xs font-bold leading-none">
+                {user.name?.charAt(0).toUpperCase()}
+              </span>
+            </div>
+          )}
+          {/* Online dot */}
+          <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 border-2 border-white rounded-full" />
+        </div>
+        <span className="text-xs font-semibold flex items-center gap-0.5">
+          Account <ChevronDown size={10} className={`transition-transform ${open ? "rotate-180" : ""}`} />
+        </span>
+      </button>
+
+      {/* Dropdown */}
+      {open && (
+        <div
+          className="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50"
+          style={{ animation: "dropDown 0.18s cubic-bezier(0.34,1.56,0.64,1)" }}
+        >
+          {/* User info header */}
+          <div className="bg-gradient-to-br from-emerald-500 to-teal-600 px-5 py-4">
+            <div className="flex items-center gap-3">
+              {user.avatar ? (
+                <img src={user.avatar} alt={user.name} className="w-11 h-11 rounded-xl object-cover shadow-md" />
+              ) : (
+                <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center">
+                  <span className="text-white text-lg font-bold">{user.name?.charAt(0).toUpperCase()}</span>
+                </div>
+              )}
+              <div>
+                <p className="font-bold text-white text-sm">{user.name}</p>
+                <p className="text-emerald-100 text-xs">{user.phone}</p>
+                <div className="flex items-center gap-1 mt-1">
+                  <Sparkles size={10} className="text-yellow-300" />
+                  <span className="text-yellow-200 text-xs font-semibold">Gold Member</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Menu items */}
+          <div className="p-2">
+            {menuItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors group"
+              >
+                <item.icon size={17} className="text-gray-400 group-hover:text-emerald-500 transition-colors" />
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="px-2 pb-2 border-t border-gray-100 pt-2 mt-0">
+            <button
+              onClick={() => { onSignOut(); setOpen(false); }}
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 transition-colors"
+            >
+              <LogOut size={17} />
+              Sign Out
+            </button>
+          </div>
+        </div>
+      )}
+
+      <style jsx global>{`
+        @keyframes dropDown {
+          from { opacity: 0; transform: translateY(-8px) scale(0.96) }
+          to   { opacity: 1; transform: translateY(0) scale(1) }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 
 // ─── CATEGORY DATA WITH SUBCATEGORIES ────────────────────────────────────────
 const categoryData = categories;
@@ -25,6 +148,20 @@ export default function Header({ cartCount = 3 }) {
   const [activeMobileCategory, setActiveMobileCategory] = useState(null);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [signInOpen, setSignInOpen]   = useState(false);
+  const [user, setUser]               = useState(null);
+
+  // Called when sign-in succeeds
+  const handleSignInSuccess = (userData) => {
+    setUser({
+      name:   "Rahim Ahmed",         // In real app, fetch from API
+      phone:  userData.phone,
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
+    });
+    setSignInOpen(false);
+  };
+
+  const handleSignOut = () => setUser(null);
 
   const navLinks = [
     { label: "🔥 Hot Deals", href: "/products" },
@@ -93,29 +230,34 @@ export default function Header({ cartCount = 3 }) {
 
           {/* actions - hidden on small screens */}
           <div className="hidden lg:flex items-center gap-2 ml-auto">
-            {[
-              { icon: <User size={20} />, label: "Account", badge: null },
-              { icon: <Heart size={20} />, label: "Wishlist", badge: 3 },
-            ].map((a, i) => (
-              <button
-                key={i}
-                className={`relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors ${a.primary
-                  ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                  : "text-gray-600 hover:bg-gray-100"
-                  }`}
+            {/* ── ACCOUNT BUTTON ── */}
+              {user ? (
+                // Signed in → show dropdown
+                <UserDropdown user={user} onSignOut={handleSignOut} />
+              ) : (
+                // Signed out → open modal
+                <button
+                  onClick={() => setSignInOpen(true)}
+                  className="relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors text-gray-600 hover:bg-gray-100 hover:text-emerald-600"
+                >
+                  <User size={20} />
+                  <span className="text-xs font-semibold hidden sm:block">Account</span>
+                </button>
+              )}
+
+            <button
+              className={`relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors 
+                   text-gray-600 hover:bg-gray-100`}
+            >
+              <Heart size={20} />
+              <span className="text-xs font-semibold">Wishlist</span>
+              <span
+                className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center"
+                style={{ width: 18, height: 18, fontSize: 10 }}
               >
-                {a.icon}
-                <span className="text-xs font-semibold">{a.label}</span>
-                {a.badge && (
-                  <span
-                    className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center"
-                    style={{ width: 18, height: 18, fontSize: 10 }}
-                  >
-                    {a.badge}
-                  </span>
-                )}
-              </button>
-            ))}
+                3
+              </span>
+            </button>
             <button
               onClick={() => setIsOpen(true)}
               className="relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors bg-emerald-600 text-white hover:bg-emerald-700"
@@ -128,6 +270,7 @@ export default function Header({ cartCount = 3 }) {
               )}
               <span className="text-xs font-semibold">Cart</span>
             </button>
+            
           </div>
 
           {/* mobile hamburger */}
@@ -163,7 +306,8 @@ export default function Header({ cartCount = 3 }) {
                     {categoryData.map((cat) => (
                       <div key={cat.id} className="group">
                         <Link
-                          href={`/${cat.name.toLowerCase()
+                          href={`/${cat.name
+                            .toLowerCase()
                             .replace(/&/g, "and")
                             .replace(/[^a-z0-9]+/g, "-")
                             .replace(/(^-|-$)/g, "")}`}
@@ -177,7 +321,8 @@ export default function Header({ cartCount = 3 }) {
                           {cat.subcategories.map((sub, idx) => (
                             <li key={idx}>
                               <Link
-                                href={`/${sub.toLowerCase()
+                                href={`/${sub
+                                  .toLowerCase()
                                   .replace(/&/g, "and")
                                   .replace(/[^a-z0-9]+/g, "-")
                                   .replace(/(^-|-$)/g, "")}`}
@@ -251,9 +396,32 @@ export default function Header({ cartCount = 3 }) {
               </button>
             </div>
 
+            {/* Sign in row for mobile */}
+            {!user && (
+              <button
+                onClick={() => { setSignInOpen(true); setMobileMenuOpen(false); }}
+                className="w-full mt-2 flex items-center justify-center gap-2 bg-emerald-600 text-white py-3 rounded-xl font-bold text-sm hover:bg-emerald-700 transition-colors"
+              >
+                <Phone size={16} /> Sign In with Mobile
+              </button>
+            )}
+
+            {user && (
+              <div className="flex items-center gap-3 mt-3 pt-3 border-t border-gray-100">
+                <img src={user.avatar} alt={user.name} className="w-9 h-9 rounded-xl object-cover" />
+                <div className="flex-1">
+                  <p className="font-bold text-sm text-gray-900">{user.name}</p>
+                  <p className="text-xs text-gray-500">{user.phone}</p>
+                </div>
+                <Link href="/account" onClick={() => setMobileMenuOpen(false)} className="text-xs text-emerald-600 font-bold">
+                  View →
+                </Link>
+              </div>
+            )}
+
             {/* User Actions */}
             <div className="grid grid-cols-3 gap-2 p-4 border-b border-gray-100">
-              {[
+              {/* {[
                 { icon: <User size={20} />, label: "Account" },
                 { icon: <Heart size={20} />, label: "Wishlist", badge: 3 },
               ].map((a, i) => (
@@ -271,12 +439,13 @@ export default function Header({ cartCount = 3 }) {
                     </span>
                   )}
                 </button>
-              ))}
-              <button onClick={() => setIsOpen(true) || setMenuOpen(false)} className="relative text-white flex flex-col items-center gap-1.5 p-3 rounded-xl bg-emerald-600 hover:bg-emerald-50 transition-colors">
+              ))} */}
+              <button
+                onClick={() => setIsOpen(true) || setMenuOpen(false)}
+                className="relative text-white flex flex-col items-center gap-1.5 p-3 rounded-xl bg-emerald-600 hover:bg-emerald-50 transition-colors"
+              >
                 <ShoppingCart size={20} />
-                <span className="text-xs font-semibold text-gray-50">
-                  Cart
-                </span>
+                <span className="text-xs font-semibold text-gray-50">Cart</span>
                 {cartCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {cartCount}
@@ -301,12 +470,14 @@ export default function Header({ cartCount = 3 }) {
                       }
                       className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg transition-colors"
                     >
-                      <Link href={`/${cat.name.toLowerCase()
-                        .replace(/&/g, "and")
-                        .replace(/[^a-z0-9]+/g, "-")
-                        .replace(/(^-|-$)/g, "")}`}
-                        onClick={() => setMenuOpen(false)} >
-
+                      <Link
+                        href={`/${cat.name
+                          .toLowerCase()
+                          .replace(/&/g, "and")
+                          .replace(/[^a-z0-9]+/g, "-")
+                          .replace(/(^-|-$)/g, "")}`}
+                        onClick={() => setMenuOpen(false)}
+                      >
                         <span className="flex items-center gap-2">
                           <span className="text-lg">{cat.emoji}</span>
                           {cat.name}
@@ -324,7 +495,8 @@ export default function Header({ cartCount = 3 }) {
                         {cat.subcategories.map((sub, idx) => (
                           <Link
                             key={idx}
-                            href={`/${sub.toLowerCase()
+                            href={`/${sub
+                              .toLowerCase()
                               .replace(/&/g, "and")
                               .replace(/[^a-z0-9]+/g, "-")
                               .replace(/(^-|-$)/g, "")}`}
@@ -381,6 +553,12 @@ export default function Header({ cartCount = 3 }) {
       )}
 
       <CartOffcanvas isOpen={isOpen} setIsOpen={setIsOpen} />
+
+     <SignInModal
+        signInOpen={signInOpen}
+        onClose={() => setSignInOpen(false)}
+        onSuccess={handleSignInSuccess}
+      />
     </>
   );
 }
