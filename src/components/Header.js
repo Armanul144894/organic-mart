@@ -29,17 +29,19 @@ function UserDropdown({ user, onSignOut }) {
 
   // Close on outside click
   useEffect(() => {
-    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
   const menuItems = [
-    { href: "#",            icon: User,    label: "My Account" },
+    { href: "#", icon: User, label: "My Account" },
     { href: "#", icon: Package, label: "My Orders" },
-    { href: "#",icon: Heart,   label: "Wishlist" },
-    { href: "#",icon: MapPin, label: "Addresses" },
-    { href: "#",icon: Settings,label: "Settings" },
+    { href: "#", icon: Heart, label: "Wishlist" },
+    { href: "#", icon: MapPin, label: "Addresses" },
+    { href: "#", icon: Settings, label: "Settings" },
   ];
 
   return (
@@ -70,7 +72,11 @@ function UserDropdown({ user, onSignOut }) {
           <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 border-2 border-white rounded-full" />
         </div>
         <span className="text-xs font-semibold flex items-center gap-0.5">
-          Account <ChevronDown size={10} className={`transition-transform ${open ? "rotate-180" : ""}`} />
+          Account{" "}
+          <ChevronDown
+            size={10}
+            className={`transition-transform ${open ? "rotate-180" : ""}`}
+          />
         </span>
       </button>
 
@@ -84,10 +90,16 @@ function UserDropdown({ user, onSignOut }) {
           <div className="bg-gradient-to-br from-emerald-500 to-teal-600 px-5 py-4">
             <div className="flex items-center gap-3">
               {user.avatar ? (
-                <img src={user.avatar} alt={user.name} className="w-11 h-11 rounded-xl object-cover shadow-md" />
+                <img
+                  src={user.avatar}
+                  alt={user.name}
+                  className="w-11 h-11 rounded-xl object-cover shadow-md"
+                />
               ) : (
                 <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center">
-                  <span className="text-white text-lg font-bold">{user.name?.charAt(0).toUpperCase()}</span>
+                  <span className="text-white text-lg font-bold">
+                    {user.name?.charAt(0).toUpperCase()}
+                  </span>
                 </div>
               )}
               <div>
@@ -95,7 +107,9 @@ function UserDropdown({ user, onSignOut }) {
                 <p className="text-emerald-100 text-xs">{user.phone}</p>
                 <div className="flex items-center gap-1 mt-1">
                   <Sparkles size={10} className="text-yellow-300" />
-                  <span className="text-yellow-200 text-xs font-semibold">Gold Member</span>
+                  <span className="text-yellow-200 text-xs font-semibold">
+                    Gold Member
+                  </span>
                 </div>
               </div>
             </div>
@@ -110,7 +124,10 @@ function UserDropdown({ user, onSignOut }) {
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors group"
               >
-                <item.icon size={17} className="text-gray-400 group-hover:text-emerald-500 transition-colors" />
+                <item.icon
+                  size={17}
+                  className="text-gray-400 group-hover:text-emerald-500 transition-colors"
+                />
                 {item.label}
               </Link>
             ))}
@@ -118,7 +135,10 @@ function UserDropdown({ user, onSignOut }) {
 
           <div className="px-2 pb-2 border-t border-gray-100 pt-2 mt-0">
             <button
-              onClick={() => { onSignOut(); setOpen(false); }}
+              onClick={() => {
+                onSignOut();
+                setOpen(false);
+              }}
               className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 transition-colors"
             >
               <LogOut size={17} />
@@ -130,14 +150,19 @@ function UserDropdown({ user, onSignOut }) {
 
       <style jsx global>{`
         @keyframes dropDown {
-          from { opacity: 0; transform: translateY(-8px) scale(0.96) }
-          to   { opacity: 1; transform: translateY(0) scale(1) }
+          from {
+            opacity: 0;
+            transform: translateY(-8px) scale(0.96);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
         }
       `}</style>
     </div>
   );
 }
-
 
 // ─── CATEGORY DATA WITH SUBCATEGORIES ────────────────────────────────────────
 const categoryData = categories;
@@ -148,15 +173,16 @@ export default function Header({ cartCount = 3 }) {
   const [activeMobileCategory, setActiveMobileCategory] = useState(null);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [signInOpen, setSignInOpen]   = useState(false);
-  const [user, setUser]               = useState(null);
+  const [signInOpen, setSignInOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
   // Called when sign-in succeeds
   const handleSignInSuccess = (userData) => {
     setUser({
-      name:   "Rahim Ahmed",         // In real app, fetch from API
-      phone:  userData.phone,
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
+      name: "Rahim Ahmed", // In real app, fetch from API
+      phone: userData.phone,
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
     });
     setSignInOpen(false);
   };
@@ -231,19 +257,21 @@ export default function Header({ cartCount = 3 }) {
           {/* actions - hidden on small screens */}
           <div className="hidden lg:flex items-center gap-2 ml-auto">
             {/* ── ACCOUNT BUTTON ── */}
-              {user ? (
-                // Signed in → show dropdown
-                <UserDropdown user={user} onSignOut={handleSignOut} />
-              ) : (
-                // Signed out → open modal
-                <button
-                  onClick={() => setSignInOpen(true)}
-                  className="relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors text-gray-600 hover:bg-gray-100 hover:text-emerald-600"
-                >
-                  <User size={20} />
-                  <span className="text-xs font-semibold hidden sm:block">Account</span>
-                </button>
-              )}
+            {user ? (
+              // Signed in → show dropdown
+              <UserDropdown user={user} onSignOut={handleSignOut} />
+            ) : (
+              // Signed out → open modal
+              <button
+                onClick={() => setSignInOpen(true)}
+                className="relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors text-gray-600 hover:bg-gray-100 hover:text-emerald-600"
+              >
+                <User size={20} />
+                <span className="text-xs font-semibold hidden sm:block">
+                  Account
+                </span>
+              </button>
+            )}
 
             <button
               className={`relative flex flex-col items-center gap-0.5 px-2.5 py-1.5 rounded-xl transition-colors 
@@ -270,7 +298,6 @@ export default function Header({ cartCount = 3 }) {
               )}
               <span className="text-xs font-semibold">Cart</span>
             </button>
-            
           </div>
 
           {/* mobile hamburger */}
@@ -396,50 +423,55 @@ export default function Header({ cartCount = 3 }) {
               </button>
             </div>
 
-            {/* Sign in row for mobile */}
-            {!user && (
-              <button
-                onClick={() => { setSignInOpen(true); setMobileMenuOpen(false); }}
-                className="w-full mt-2 flex items-center justify-center gap-2 bg-emerald-600 text-white py-3 rounded-xl font-bold text-sm hover:bg-emerald-700 transition-colors"
-              >
-                <Phone size={16} /> Sign In with Mobile
-              </button>
-            )}
-
-            {user && (
-              <div className="flex items-center gap-3 mt-3 pt-3 border-t border-gray-100">
-                <img src={user.avatar} alt={user.name} className="w-9 h-9 rounded-xl object-cover" />
-                <div className="flex-1">
-                  <p className="font-bold text-sm text-gray-900">{user.name}</p>
-                  <p className="text-xs text-gray-500">{user.phone}</p>
-                </div>
-                <Link href="/account" onClick={() => setMobileMenuOpen(false)} className="text-xs text-emerald-600 font-bold">
-                  View →
-                </Link>
-              </div>
-            )}
-
             {/* User Actions */}
             <div className="grid grid-cols-3 gap-2 p-4 border-b border-gray-100">
-              {/* {[
-                { icon: <User size={20} />, label: "Account" },
-                { icon: <Heart size={20} />, label: "Wishlist", badge: 3 },
-              ].map((a, i) => (
+              {/* Sign in row for mobile */}
+              {!user && (
                 <button
-                  key={i}
-                  className="relative flex flex-col items-center gap-1.5 p-3 rounded-xl bg-gray-50 hover:bg-emerald-50 transition-colors"
+                  onClick={() => {
+                    setSignInOpen(true);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="relative text-white flex flex-col items-center gap-1.5 p-3 rounded-xl bg-emerald-600 hover:bg-emerald-50 transition-colors"
                 >
-                  {a.icon}
-                  <span className="text-xs font-semibold text-gray-700">
-                    {a.label}
-                  </span>
-                  {a.badge && (
-                    <span className="absolute top-2 right-2 bg-red-500 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                      {a.badge}
-                    </span>
-                  )}
+                  <Phone size={16} /> Sign In
                 </button>
-              ))} */}
+              )}
+
+              {user && (
+                <div className="flex items-center gap-3 mt-3 pt-3 border-t border-gray-100">
+                  <Image
+                    height={50}
+                    width={50}
+                    src={user.avatar}
+                    alt={user.name}
+                    className="w-9 h-9 rounded-xl object-cover"
+                  />
+                  <div className="flex-1">
+                    <p className="font-bold text-sm text-gray-900">
+                      {user.name}
+                    </p>
+                    <p className="text-xs text-gray-500">{user.phone}</p>
+                  </div>
+                  <Link
+                    href="/account"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-xs text-emerald-600 font-bold"
+                  >
+                    View →
+                  </Link>
+                </div>
+              )}
+              <button className="relative text-white flex flex-col items-center gap-1.5 p-3 rounded-xl bg-emerald-600 hover:bg-emerald-50 transition-colors">
+                <Heart size={20} />
+                <span className="text-xs font-semibold text-gray-50">
+                  Wishlist
+                </span>
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  3
+                </span>
+              </button>
+
               <button
                 onClick={() => setIsOpen(true) || setMenuOpen(false)}
                 className="relative text-white flex flex-col items-center gap-1.5 p-3 rounded-xl bg-emerald-600 hover:bg-emerald-50 transition-colors"
@@ -554,7 +586,7 @@ export default function Header({ cartCount = 3 }) {
 
       <CartOffcanvas isOpen={isOpen} setIsOpen={setIsOpen} />
 
-     <SignInModal
+      <SignInModal
         signInOpen={signInOpen}
         onClose={() => setSignInOpen(false)}
         onSuccess={handleSignInSuccess}

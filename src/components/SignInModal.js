@@ -150,7 +150,7 @@ export default function SignInModal({ signInOpen, onClose, onSuccess }) {
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Mobile Number</label>
                 <div className="flex gap-3">
-                  <div className="flex items-center gap-2 bg-gray-50 border-2 border-gray-200 rounded-xl px-3 py-3 flex-shrink-0">
+                  <div className="md:flex hidden items-center gap-2 bg-gray-50 border-2 border-gray-200 rounded-xl px-3 py-3 flex-shrink-0">
                     <span className="text-lg">🇧🇩</span>
                     <span className="text-sm font-bold text-gray-700">+880</span>
                   </div>
