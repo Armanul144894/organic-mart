@@ -426,42 +426,18 @@ export default function Header({ cartCount = 3 }) {
             {/* User Actions */}
             <div className="grid grid-cols-3 gap-2 p-4 border-b border-gray-100">
               {/* Sign in row for mobile */}
-              {!user && (
-                <button
+              <button
                   onClick={() => {
                     setSignInOpen(true);
-                    setMobileMenuOpen(false);
+                    setMenuOpen(false);
                   }}
                   className="relative text-white flex flex-col items-center gap-1.5 p-3 rounded-xl bg-emerald-600 hover:bg-emerald-50 transition-colors"
                 >
                   <Phone size={16} /> Sign In
                 </button>
-              )}
 
-              {user && (
-                <div className="flex items-center gap-3 mt-3 pt-3 border-t border-gray-100">
-                  <Image
-                    height={50}
-                    width={50}
-                    src={user.avatar}
-                    alt={user.name}
-                    className="w-9 h-9 rounded-xl object-cover"
-                  />
-                  <div className="flex-1">
-                    <p className="font-bold text-sm text-gray-900">
-                      {user.name}
-                    </p>
-                    <p className="text-xs text-gray-500">{user.phone}</p>
-                  </div>
-                  <Link
-                    href="/account"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs text-emerald-600 font-bold"
-                  >
-                    View →
-                  </Link>
-                </div>
-              )}
+              
+              
               <button className="relative text-white flex flex-col items-center gap-1.5 p-3 rounded-xl bg-emerald-600 hover:bg-emerald-50 transition-colors">
                 <Heart size={20} />
                 <span className="text-xs font-semibold text-gray-50">
